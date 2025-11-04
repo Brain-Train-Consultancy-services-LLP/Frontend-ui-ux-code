@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BrainTrain Consultancy Website
 
 A modern, enterprise-level website built with Next.js 15, TypeScript, and Tailwind CSS, optimized for performance, scalability, and maintainability.
@@ -243,3 +244,6 @@ This project is proprietary to BrainTrain Consultancy Services LLP.
 ---
 
 **Built with ❤️ by the BrainTrain Team**
+=======
+# enterprise-frontend
+>>>>>>> a696b427730a7d61c67cbcb0601193ea292e8d64
