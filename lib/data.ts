@@ -6,7 +6,6 @@ export interface TeamMember {
   image: string;
   bio?: string;
   linkedin?: string;
-  twitter?: string;
 }
 
 export interface Service {
@@ -69,28 +68,29 @@ export interface BlogPost {
 export const teamMembers: TeamMember[] = [
   {
     id: "rajendran",
-    name: "Rajendran Mariagnam",
+    name: "Rajendran Mariagnanam",
     position: "CEO & Founder",
-    image: "/team1.png",
+    image: "/assets/images/team1.jpeg",
     bio: "Visionary leader with 15+ years in AI and business consulting.",
-    linkedin: "https://linkedin.com/in/rajendran-mariagnam"
+    linkedin: "https://linkedin.com/in/rajendranm"
   },
   {
     id: "monika",
     name: "Monika Singh",
-    position: "Project Manager",
-    image: "/team2.png",
-    bio: "Expert in project management and client relations.",
-    linkedin: "https://linkedin.com/in/monika-singh"
+    position: "Frontend Developer, Project Manager",
+    image: "/assets/images/team5.png",
+    bio: "Expert in frontend development, project management, and client relations.",
+    linkedin: "https://linkedin.com/in/monikasinghtech"
   },
   {
-    id: "prachi",
-    name: "Prachi",
-    position: "Lead Analyst",
-    image: "/team3.png",
-    bio: "Data analytics specialist with expertise in AI implementation.",
-    linkedin: "https://linkedin.com/in/prachi-analyst"
+    id: "manoj",
+    name: "Manoj Kumar Tadekoru",
+    position: "Backend Developer",
+    image: "/assets/images/team3.jpeg",
+    bio: "Backend development specialist with strong expertise in databases and API implementation.",
+    linkedin: "https://linkedin.com/in/manoj-kumar-tadekoru-5a7958216/"
   },
+  /*
   {
     id: "shubham",
     name: "Shubham Kumar",
@@ -98,15 +98,8 @@ export const teamMembers: TeamMember[] = [
     image: "/team4.png",
     bio: "Machine learning engineer focused on practical AI solutions.",
     linkedin: "https://linkedin.com/in/shubham-kumar-ai"
-  },
-  {
-    id: "robert",
-    name: "Robert Brown",
-    position: "Data Scientist",
-    image: "/team5.png",
-    bio: "Advanced analytics and predictive modeling expert.",
-    linkedin: "https://linkedin.com/in/robert-brown-data"
-  }
+  },*/
+  
 ];
 
 // Services data

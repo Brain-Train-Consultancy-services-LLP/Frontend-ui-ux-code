@@ -1,90 +1,39 @@
-/*"use client";
-import Image from "next/image";
 
-const testimonials = [
-  {
-    name: "Rohan Mehta",
-    position: "CEO, FinCorp Ltd.",
-    feedback: "BrainTrain's AI solutions transformed our workflow efficiency. Their team is professional and highly skilled.",
-    avatar: "/testimonials/rohan.jpg",
-    rating: 5,
-  },
-  {
-    name: "Priya Sharma",
-    position: "HR Manager, HealthTech Innovations",
-    feedback: "The corporate training programs were insightful and engaging. Highly recommend their AI bootcamps!",
-    avatar: "/testimonials/priya.jpg",
-    rating: 5,
-  },
-  {
-    name: "Amit Verma",
-    position: "CTO, Global Tech Solutions",
-    feedback: "Innovative solutions delivered with professionalism. BrainTrain’s AI consulting gave us measurable results.",
-    avatar: "/testimonials/amit.jpg",
-    rating: 4,
-  },
-];
-
-const Testimonials = () => {
-  return (
-    <section className="w-full py-20 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-        <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
-        <p className="text-center text-lg mb-12">
-          Feedback from corporate partners and students who experienced innovation firsthand.
-        </p>
-
-    
-        <div className="flex gap-6 overflow-x-auto scrollbar-hide">
-          {testimonials.map((testi, idx) => (
-            <div
-              key={idx}
-              className="min-w-[300px] bg-white rounded-xl shadow-lg p-6 flex-shrink-0 hover:shadow-2xl transition-transform transform hover:-translate-y-2 hover:scale-105 duration-300"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <Image
-                  src={testi.avatar}
-                  alt={testi.name}
-                  width={60}
-                  height={60}
-                  className="rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">{testi.name}</h3>
-                  <p className="text-gray-500 text-sm">{testi.position}</p>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">"{testi.feedback}"</p>
-              
-              <div className="flex text-yellow-400">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <span key={i}>
-                    {i < testi.rating ? "★" : "☆"}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Testimonials;*/
 "use client";
 import { FaQuoteLeft, FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 
-const testimonials = [
-  { name: "Alice Johnson", role: "CEO, TechCorp", message: "BrainTrain’s AI solutions transformed our business processes!", rating: 5 },
-  { name: "Mark Smith", role: "CTO, FinTech", message: "Their data analytics services helped us make better decisions.", rating: 4 },
-  { name: "Sara Lee", role: "Head of Operations", message: "Professional, reliable, and innovative team!", rating: 5 },
-  { name: "John Doe", role: "Manager, InnovateX", message: "Their insights and AI tools improved our workflow significantly.", rating: 5 },
-  { name: "Emma Brown", role: "COO, StartUpX", message: "Efficient, innovative, and game-changing solutions!", rating: 5 },
-];
+ const testimonials = [
+    {
+      name: "Rajendran M",
+      role: "Founder & CEO",
+      message:
+        "At BrainTrain, we believe AI should simplify, not complicate, enterprise systems. Our mission is to make innovation accessible for every business.",
+      rating: 5,
+    },
+    {
+      name: "Monika Singh",
+      role: "Tech Lead",
+      message:
+        "We’re building products that help teams think smarter, move faster, and transform ideas into real impact with AI-driven efficiency.",
+      rating: 5,
+    },
+    {
+      name: "Priya Nair",
+      role: "AI Engineer",
+      message:
+        "Our vision is to merge innovation with purpose — developing intelligent tools that empower people, not replace them.",
+      rating: 5,
+    },
+    {
+      name: "Aman Gupta",
+      role: "Design Head",
+      message:
+        "Every line of design we create reflects empathy — our goal is to make AI not just smart, but human-centered.",
+      rating: 5,
+    },
+  ];
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -136,17 +85,17 @@ const Testimonials = () => {
 
   return (
     <section className="relative py-28 overflow-hidden bg-gray-50">
-      {/* Background shapes */}
+      
       <div className="absolute top-10 left-0 w-72 h-72 bg-indigo-100/20 rounded-full blur-3xl animate-bounce-slow -z-10"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-100/20 rounded-full blur-3xl animate-pulse-slow -z-10"></div>
       <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-green-100/10 rounded-full blur-2xl animate-spin-slow -z-10"></div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-16">
-          What Our Clients Say
+          What Our Teams Say
         </h2>
 
-        {/* Carousel */}
+     
         <div className="relative overflow-hidden h-96">
           <motion.div
             className="flex cursor-grab relative"
@@ -189,7 +138,7 @@ const Testimonials = () => {
             })}
           </motion.div>
 
-          {/* Navigation */}
+         
           <button
             onClick={() => goToIndex(activeIndex - 1)}
             className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/80 p-3 rounded-full shadow hover:bg-indigo-600 hover:text-white transition"
@@ -204,7 +153,6 @@ const Testimonials = () => {
           </button>
         </div>
 
-        {/* Pagination */}
         <div className="flex justify-center mt-8 gap-3">
           {testimonials.map((_, idx) => (
             <button
@@ -251,3 +199,4 @@ const TiltCard = ({ testimonial, isActive }) => {
 };
 
 export default Testimonials;
+

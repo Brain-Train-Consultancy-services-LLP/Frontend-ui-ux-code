@@ -2,6 +2,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import HeroImage from "@/public/assets/images/hero-ai.png"
+
 
 const Hero = () => {
   return (
@@ -26,7 +28,7 @@ const Hero = () => {
               Get in Touch
             </Link>
             <Link
-              href="/bootcamp"
+              href="/bootcamps"
               className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
             >
               Join Our Bootcamp
@@ -52,7 +54,7 @@ const Hero = () => {
         {/* Right Side: Hero Image */}
         <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center items-center animate-fade-in-right animate-delay-300">
           <Image
-            src="/hero-ai.png"
+            src={HeroImage}
             alt="AI Innovation"
             width={500}
             height={400}

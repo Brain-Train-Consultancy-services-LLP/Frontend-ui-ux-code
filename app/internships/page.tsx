@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
+import { toast } from "sonner";
 
 // Lazy load icons
 const FaLaptopCode = dynamic(() => import("react-icons/fa").then((mod) => mod.FaLaptopCode));
@@ -85,50 +86,54 @@ const InternshipsPage = () => {
     if (e.target.files) setFormData({ ...formData, resume: e.target.files[0] });
   };
 
+ 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      let resumeUrl = null;
+  try {
+    const formToSend = new FormData();
+    formToSend.append("name", formData.name);
+    formToSend.append("email", formData.email);
+    formToSend.append("mobile", formData.mobile);
+    formToSend.append("internship", formData.internship);
 
-      if (formData.resume) {
-        const fileExt = formData.resume.name.split(".").pop();
-        const fileName = `${formData.name.replace(/\s+/g, "_")}_${Date.now()}.${fileExt}`;
-        const { data: fileData, error: uploadError } = await supabase.storage
-          .from("intern-resumes")
-          .upload(fileName, formData.resume);
-
-        if (uploadError) throw uploadError;
-
-        const { data: publicUrlData } = supabase.storage
-          .from("intern-resumes")
-          .getPublicUrl(fileData.path);
-        resumeUrl = publicUrlData.publicUrl;
-      }
-
-      const { error } = await supabase.from("intern_applications").insert([
-        {
-          name: formData.name,
-          email: formData.email,
-          mobile: formData.mobile,
-          internship: formData.internship,
-          resume_url: resumeUrl,
-        },
-      ]);
-
-      if (error) throw error;
-
-      alert("✅ Application submitted successfully!");
-      setIsFormOpen(false);
-      setFormData({ name: "", email: "", mobile: "", internship: "", resume: null });
-    } catch (err: any) {
-      console.error(err.message);
-      alert("❌ Submission failed. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    if (formData.resume) {
+      formToSend.append("resume", formData.resume);
     }
-  };
+
+    const response = await fetch("http://127.0.0.1:8000/internship", {
+      method: "POST",
+      body: formToSend,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log("Backend Response:", errorData);
+      toast.error("Submission failed. Please check your details.");
+      return;
+    }
+
+
+     toast.success("🎉 Internship Application Submitted Successfully!");
+
+    setIsFormOpen(false);
+    setFormData({
+      name: "",
+      email: "",
+      mobile: "",
+      internship: "",
+      resume: null,
+    });
+
+  } catch (error) {
+    console.error(error);
+    toast.error("⚠️ Unable to connect to server. Try again later.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <div className="w-full min-h-screen bg-gray-100 text-gray-900">
@@ -148,7 +153,7 @@ const InternshipsPage = () => {
             Gain real-world experience across AI, Software Development, Data Analytics, and Automation. Work with our expert teams and accelerate your career growth.
           </p>
 
-         {/* Internship Cards */}
+       
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
   {internships.map((intern) => (
     <div
@@ -156,7 +161,7 @@ const InternshipsPage = () => {
       data-aos="zoom-in"
       className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-lg p-8 transform transition duration-500 hover:-translate-y-3 hover:scale-105 relative overflow-hidden"
     >
-      {/* Gradient Glow Overlay */}
+      
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-yellow-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
       <div className="mb-4 mx-auto relative z-10">
@@ -183,7 +188,7 @@ const InternshipsPage = () => {
 </div>
 
 
-          {/* Apply Button */}
+        
           <div className="mt-16">
             <button
               onClick={() => setIsFormOpen(true)}
@@ -194,7 +199,7 @@ const InternshipsPage = () => {
           </div>
         </div>
 
-        {/* Internship Form Modal */}
+   
         {isFormOpen && (
           <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50 backdrop-blur-sm">
             <div className="bg-white rounded-2xl p-8 max-w-lg w-full relative shadow-2xl">
@@ -258,17 +263,22 @@ const InternshipsPage = () => {
                   />
                 </label>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full font-bold py-3 px-4 rounded-lg transition-all duration-300 ${
-                    isSubmitting
-                      ? "bg-gray-400 text-gray-100 cursor-not-allowed"
-                      : "bg-yellow-400 hover:bg-yellow-300 text-gray-900"
-                  }`}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
-                </button>
+               <button
+  type="submit"
+  disabled={isSubmitting}
+  className={`w-full font-bold py-3 px-4 rounded-lg transition-all duration-300 flex justify-center ${
+    isSubmitting
+      ? "bg-gray-300 cursor-not-allowed"
+      : "bg-yellow-400 hover:bg-yellow-300 text-gray-900"
+  }`}
+>
+  {isSubmitting ? (
+    <span className="animate-spin border-2 border-gray-700 border-t-transparent rounded-full w-5 h-5"></span>
+  ) : (
+    "Submit Application"
+  )}
+</button>
+
               </form>
             </div>
           </div>

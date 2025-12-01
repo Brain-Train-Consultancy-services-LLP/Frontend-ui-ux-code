@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 
 
-@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -117,7 +116,8 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
+
   html, body {
     margin: 0;
     padding: 0;
@@ -149,15 +149,6 @@ body {
     padding: 0;
   }
 }
-
-/* globals.css */
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-
-
 
 
 
@@ -200,17 +191,35 @@ html, body {
   animation: spin-slow 10s linear infinite;
 }
 
-/* Professional Enterprise Animations */
-@keyframes fadeInUp {
+@keyframes slowspin {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    transform: rotate(0deg);
   }
   to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slowspin {
+  animation: slowspin 25s linear infinite;
+}
+
+/* Professional Enterprise Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
 
 @keyframes fadeInLeft {
   from {
@@ -264,6 +273,12 @@ html, body {
     transform: translateY(-10px);
   }
 }
+
+@keyframes floating-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
+}
+.animate-floating-slow { animation: floating-slow 8s ease-in-out infinite; }
 
 @keyframes glow {
   0%, 100% {

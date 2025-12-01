@@ -1,110 +1,3 @@
-/*
-"use client";
-import { useState } from "react";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
-
-const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData);
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
-  return (
-    <section className="relative py-24  text-gray-100 overflow-hidden">
-      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12">
-        
-      
-        <div className="space-y-8">
-          <h2 className="text-4xl font-bold">Get in Touch</h2>
-          <p className="text-gray-300 text-lg">
-            Have a question or want to schedule a consultation? Fill out the form and we will get back to you.
-          </p>
-
-          <div className="flex flex-col space-y-6">
-            <div className="flex items-center gap-4">
-              <FaEnvelope className="text-yellow-400 text-2xl" />
-              <span>contact@braintrain.com</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <FaPhone className="text-yellow-400 text-2xl" />
-              <span>+91 98765 43210</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <FaMapMarkerAlt className="text-yellow-400 text-2xl" />
-              <span>NIT Jalandhar, Punjab, India</span>
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/50 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
-            />
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Your Email"
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/50 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Your Message"
-              required
-              rows={5}
-              className="w-full px-4 py-3 rounded-lg bg-gray-800/50 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-yellow-400 text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-
-       
-        <div className="h-96 rounded-xl overflow-hidden shadow-lg border-2 border-yellow-400">
-          <iframe
-            title="BrainTrain Office Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.123456789!2d75.567890!3d31.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391aabcd12345678%3A0x1234567890abcdef!2sNIT%20Jalandhar!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
-            width="100%"
-            height="100%"
-            className="border-0"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
-        </div>
-
-       
-        <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-400/20 rounded-full animate-pulse-slow"></div>
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-blue-500/20 rounded-full animate-bounce-slow"></div>
-      </div>
-    </section>
-  );
-};
-
-export default Contact;*/
-
-//bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900/90
-
 "use client";
 import React, { useState } from "react";
 
@@ -114,8 +7,6 @@ const ContactUs = () => {
     lastName: "",
     email: "",
     phone: "",
-    company: "",
-    jobTitle: "",
     state: "",
     inquiryType: "",
     message: "",
@@ -126,13 +17,51 @@ const ContactUs = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type, checked } = e.target;
+    if (name === "phone") {
+      if (!/^\d*$/.test(value)) return;
+    }
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for contacting Brain Train Consultancy Services LLP!");
-    console.log(formData);
+     if (formData.phone && formData.phone.length !== 10) {
+      alert("📞 Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // ✅ CHECKBOX VALIDATION
+    if (!formData.agree) {
+      alert("⚠️ Please check the agreement checkbox before submitting.");
+      return;
+    }
+    try {
+      const response = await fetch("http://127.0.0.1:8000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("✅ Thank you for contacting us!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          state: "",
+          inquiryType: "",
+          message: "",
+          agree: false,
+        });
+      } else {
+        alert("❌ Something went wrong!");
+      }
+    } catch (error) {
+      alert("❌ Cannot connect to server!");
+    }
   };
 
   return (
@@ -180,29 +109,10 @@ const ContactUs = () => {
           <input
             type="text"
             name="phone"
-            placeholder="Phone"
+            placeholder="Phone (10 digits)"
             value={formData.phone}
             onChange={handleChange}
-            className="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 text-gray-900"
-          />
-
-          <input
-            type="text"
-            name="company"
-            placeholder="Company *"
-            value={formData.company}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 text-gray-900"
-          />
-
-          <input
-            type="text"
-            name="jobTitle"
-            placeholder="Job Title *"
-            value={formData.jobTitle}
-            onChange={handleChange}
-            required
+            maxLength={10}
             className="border border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-500 text-gray-900"
           />
 

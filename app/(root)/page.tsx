@@ -1,35 +1,8 @@
-/*import AboutUs from "@/components/AboutUs";
-import HeroSection from "@/components/HeroSection";
-import Services from "@/components/Services";
-import Industries from "@/components/Industries";
-import CaseStudies from "@/components/CaseStudies";
-import Testimonials from "@/components/Testimonials"
-import Blog from "@/components/Blog"
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-
-export default function Home() {
-  return (
-    <>
-        <HeroSection/>
-        <AboutUs/>
-        <Services/>
-        <Industries />
-        <CaseStudies/>
-        <Testimonials/>
-        <Blog/>
-        <Contact/>
-        <Footer />
-    </>
-  );
-}
-*/
 "use client";
 
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -37,8 +10,7 @@ import AboutUs from "@/components/AboutUs";
 import Services from "@/components/Services";
 import Industries from "@/components/Industries";
 import Testimonials from "@/components/Testimonials";
-import Blog from "@/components/Blog";
-import Footer from "@/components/Footer";
+import Insights from "@/components/InsightsSection";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
 
 export default function Home() {
@@ -58,7 +30,7 @@ export default function Home() {
       {/* Header */}
       <Header />
 
-      {/* Main content */}
+      {/* Main Content */}
       <main className="flex-grow w-full">
         <section id="home" data-aos="fade-up" className="w-full">
           <HeroSection />
@@ -81,12 +53,11 @@ export default function Home() {
         </section>
 
         <section data-aos="fade-up" className="w-full">
-          <Blog />
+          <Insights />
         </section>
       </main>
 
-      {/* Footer */}
-      <Footer />
+   
     </div>
   );
 }

@@ -1,9 +1,13 @@
+
+
 "use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Logo from "@/public/assets/images/logo.png"
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,21 +39,47 @@ const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         
-        <Link
-          href="/"
-          className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-indigo-400 to-blue-500 bg-clip-text text-transparent"
-        >
-          BrainTrain
+       {/* ===== Logo + Company Name ===== */}
+<Link href="/" className="flex items-center gap-3 group transition">
+  
+  {/* Scroll Background for Logo */}
+  <div
+    className={`p-[6px] rounded-full transition-all duration-300 ${
+      isScrolled ? "bg-gray-500" : "bg-white/20 backdrop-blur"
+    }`}
+  >
+    <div className="relative w-10 h-10">
+      <Image
+        src={Logo}
+        alt="Brain Train Logo"
+        fill
+        className="rounded-full object-cover"
+      />
+    </div>
+  </div>
+
+          <div className="leading-tight">
+            <p className="text-xl font-extrabold tracking-wide bg-gradient-to-r from-indigo-400 to-blue-500 bg-clip-text text-transparent">
+              Brain Train
+            </p>
+            <p className={`text-xs font-medium ${
+              isScrolled ? "text-gray-700" : "text-gray-300"
+            }`}>
+              Consultancy Services LLP
+            </p>
+          </div>
         </Link>
 
-    
+        {/* ===== Desktop Menu ===== */}
         <nav className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
               className={`font-medium transition-colors relative group ${
-                pathname === link.href ? "text-yellow-400" : "hover:text-yellow-300"
+                pathname === link.href
+                  ? "text-yellow-400"
+                  : "hover:text-yellow-300"
               }`}
             >
               {link.name}
@@ -58,7 +88,7 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-       
+        {/* ===== Desktop Button ===== */}
         <div className="hidden lg:flex items-center space-x-3">
           <Link
             href="/get-started"
@@ -68,7 +98,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-       
+        {/* ===== Mobile Menu Button ===== */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`lg:hidden p-2 transition ${isScrolled ? "text-black" : "text-white"}`}
@@ -77,7 +107,7 @@ const Header: React.FC = () => {
         </button>
       </div>
 
-    
+      {/* ===== Mobile Dropdown ===== */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
           isMenuOpen ? "max-h-[500px]" : "max-h-0"
@@ -97,7 +127,6 @@ const Header: React.FC = () => {
             </Link>
           ))}
 
-         
           <div className="pt-4 border-t mt-4">
             <Link
               href="/get-started"
@@ -114,4 +143,5 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
 

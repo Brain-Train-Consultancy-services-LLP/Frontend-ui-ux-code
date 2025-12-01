@@ -1,7 +1,7 @@
 
 "use client";
-import { teamApi } from "@/lib/api"; // ✅ add this
 
+import { teamApi } from "@/lib/api";
 import { TeamMember } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import { LoadingSkeleton } from "./ui/loading";
@@ -9,7 +9,9 @@ import { ErrorBoundary } from "./ui/error-boundary";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { FaLinkedin } from "react-icons/fa";
 
+// -------------------- TEAM MEMBER CARD --------------------
 interface TeamMemberCardProps {
   member: TeamMember;
 }
@@ -23,20 +25,37 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => (
   >
     <div className="relative w-16 h-16 flex-shrink-0">
       <Image
-        src={member.image}
+        src={member.image} 
         alt={member.name}
         fill
         className="object-cover rounded-full border border-gray-300"
       />
     </div>
-    <div>
-      <h3 className="text-gray-800 font-semibold">{member.name}</h3>
+
+    <div className="flex-1">
+      <h3 className="text-gray-800 font-semibold flex items-center gap-2">
+        {member.name}
+
+        {/* LinkedIn Icon */}
+        {member.linkedin && (
+          <a
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800"
+          >
+            <FaLinkedin size={18} />
+          </a>
+        )}
+      </h3>
+
       <p className="text-gray-600 text-sm">{member.position}</p>
       {member.bio && <p className="text-gray-500 text-xs mt-1 line-clamp-2">{member.bio}</p>}
     </div>
   </motion.div>
 );
 
+// -------------------- ABOUT US PAGE --------------------
 const AboutUs: React.FC = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +65,6 @@ const AboutUs: React.FC = () => {
     const fetchTeam = async () => {
       try {
         setLoading(true);
-        // Replace this with your actual API call
         const response = await teamApi.getAll();
 
         if (response.success && Array.isArray(response.data)) {
@@ -58,12 +76,8 @@ const AboutUs: React.FC = () => {
         console.error("Error fetching team:", err);
         setError(err.message || "An unexpected error occurred");
 
-        // Fallback/mock data
-        const fallbackData: TeamMember[] = [
-          { id: 1, name: "Alice Johnson", position: "CEO", image: "/mock/alice.png", bio: "Leading the vision." },
-          { id: 2, name: "Bob Smith", position: "CTO", image: "/mock/bob.png", bio: "Technology strategist." },
-          { id: 3, name: "Carol Lee", position: "COO", image: "/mock/carol.png", bio: "Operations expert." }
-        ];
+        // Fallback data
+        const fallbackData: TeamMember[] = [];
         setTeamMembers(fallbackData);
       } finally {
         setLoading(false);
@@ -96,11 +110,13 @@ const AboutUs: React.FC = () => {
             >
               <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200">
                 <CardHeader>
-                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">Our Vision</CardTitle>
+                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
+                    Our Vision
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-600 text-lg leading-relaxed">
-                    To be a leading provider of AI-driven solutions that drive innovation, efficiency, and measurable impact across industries.
+                    To build an ecosystem where AI augments society by creating more opportunities and jobs, rather than replacing them.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -152,11 +168,13 @@ const AboutUs: React.FC = () => {
             >
               <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200">
                 <CardHeader>
-                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">Our Mission</CardTitle>
+                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
+                    Our Mission
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-600 text-lg leading-relaxed">
-                    Deliver innovative AI solutions and professional consulting that empower businesses and students to achieve their full potential.
+                    To create a SaaS-based ecosystem that guides young talent through learning and developing MVPs in AI/ML, core engineering, biotechnology, and beyond. We aim to enhance the skills of engineers, nurture world-class professionals, and contribute to India’s self-reliance under the Atmanirbhar Bharat initiative.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -169,3 +187,105 @@ const AboutUs: React.FC = () => {
 };
 
 export default AboutUs;
+
+// -------------------- INTERFACES --------------------
+export interface TeamMember {
+  id: string;
+  name: string;
+  position: string;
+  image: string;
+  bio?: string;
+  linkedin?: string;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  cta: string;
+  href: string;
+}
+
+export interface Industry {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  solutions: string[];
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  client: string;
+  industry: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  image: string;
+  testimonial?: {
+    quote: string;
+    author: string;
+    position: string;
+  };
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  position: string;
+  company: string;
+  quote: string;
+  image: string;
+  rating: number;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  publishedAt: string;
+  image: string;
+  tags: string[];
+  slug: string;
+}
+
+// -------------------- TEAM DATA --------------------
+export const teamMembers: TeamMember[] = [
+  {
+    id: "rajendran",
+    name: "Rajendran Mariagnanam",
+    position: "CEO & Founder",
+    image: "/team1.png",
+    bio: "Visionary leader with 15+ years in AI and business consulting.",
+    linkedin: "https://linkedin.com/in/rajendran-mariagnam",
+  },
+  {
+    id: "monika",
+    name: "Monika Singh",
+    position: "Project Manager",
+    image: "/team2.png",
+    bio: "Expert in project management and client relations.",
+    linkedin: "https://linkedin.com/in/monika-singh",
+  },
+  {
+    id: "manoj",
+    name: "Manoj",
+    position: "Lead Analyst",
+    image: "/team3.png",
+    bio: "Data analytics specialist with expertise in AI implementation.",
+    linkedin: "https://linkedin.com/in/prachi-analyst",
+  },
+  {
+    id: "shubham",
+    name: "Shubham Kumar",
+    position: "AI Specialist",
+    image: "/team4.png",
+    bio: "Machine learning engineer focused on practical AI solutions.",
+    linkedin: "https://linkedin.com/in/shubham-kumar-ai",
+  },
+];
