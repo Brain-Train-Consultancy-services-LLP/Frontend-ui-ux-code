@@ -82,7 +82,10 @@ const BootcampsPage: React.FC = () => {
           {bootcamps.map((bootcamp, index) => (
             <div
               key={bootcamp.title}
-              ref={(el) => el && (cardsRef.current[index] = el)}
+              ref={(el) => {
+  if (el) cardsRef.current[index] = el;
+}}
+
               className="bg-white shadow-2xl rounded-2xl p-8 transform transition duration-500 opacity-0 translate-y-10 hover:scale-105"
             >
               <h3 className="text-2xl font-semibold mb-3">{bootcamp.title}</h3>

@@ -18,7 +18,8 @@ export default function RegisterWizard() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(initialData);
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
 
   // Update data
   const update = (field: any) => {
