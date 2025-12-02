@@ -11,6 +11,7 @@ export interface TeamMember {
 export interface Service {
   id: string;
   title: string;
+  slug:string;
   description: string;
   icon: string;
   features: string[];
@@ -107,6 +108,7 @@ export const services: Service[] = [
   {
     id: "ai-solutions",
     title: "AI Solutions",
+    slug: "ai-solutions",
     description: "Innovative AI-powered solutions for businesses and research projects.",
     icon: "FaBrain",
     features: [
@@ -121,6 +123,7 @@ export const services: Service[] = [
   {
     id: "software-development",
     title: "Software Development",
+    slug: "software-development",
     description: "End-to-end software development with modern technologies and best practices.",
     icon: "FaLaptopCode",
     features: [
@@ -135,6 +138,7 @@ export const services: Service[] = [
   {
     id: "data-analytics",
     title: "Data Analytics",
+    slug: "data-analytics",
     description: "Actionable insights using advanced analytics and machine learning.",
     icon: "FaChartLine",
     features: [
@@ -149,6 +153,7 @@ export const services: Service[] = [
   {
     id: "automation",
     title: "Automation",
+    slug: "automation",
     description: "Streamlined processes and automation solutions for efficiency.",
     icon: "FaCogs",
     features: [

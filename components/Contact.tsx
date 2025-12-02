@@ -14,14 +14,24 @@ const ContactUs = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type, checked } = e.target;
-    if (name === "phone") {
-      if (!/^\d*$/.test(value)) return;
-    }
-    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
-  };
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  const { name, value, type } = e.target;
+
+  const checked =
+    type === "checkbox" && "checked" in e.target
+      ? (e.target as HTMLInputElement).checked
+      : false;
+
+  if (name === "phone") {
+    if (!/^\d*$/.test(value)) return;
+  }
+
+  setFormData({
+    ...formData,
+    [name]: type === "checkbox" ? checked : value,
+  });
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
