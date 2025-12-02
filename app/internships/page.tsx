@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { createClient } from "@supabase/supabase-js";
 import "aos/dist/aos.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,12 +16,6 @@ const FaUsers = dynamic(() => import("react-icons/fa").then((mod) => mod.FaUsers
 
 // Lazy load AOS
 const AOS = dynamic(() => import("aos"), { ssr: false });
-
-// Supabase Client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 const internships = [
   {
