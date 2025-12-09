@@ -27,6 +27,14 @@ const Hero = () => {
             >
               Get in Touch
             </Link>
+             {/* Register */}
+            <Link
+              href="/register"
+                className="bg-gradient-to-r from-[#1e40af] to-[#3b82f6] text-white font-semibold px-6 py-3 rounded-lg 
+                shadow-lg hover:shadow-xl hover:scale-105 transition"
+            >
+               Register
+            </Link>
             <Link
               href="/bootcamps"
               className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"

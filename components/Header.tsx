@@ -88,15 +88,29 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        {/* ===== Desktop Button ===== */}
-        <div className="hidden lg:flex items-center space-x-3">
-          <Link
-            href="/get-started"
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-full transition duration-300 hover:scale-105 shadow-md"
-          >
-            Get Started
-          </Link>
-        </div>
+        {/* ===== Desktop Buttons ===== */}
+<div className="hidden lg:flex items-center space-x-4">
+
+  {/* Register Button */}
+  <Link
+    href="/register"
+    className="px-5 py-2 font-semibold rounded-full bg-gradient-to-r from-pink-400 to-red-500 text-white
+    shadow-lg hover:shadow-xl transition duration-300 hover:scale-105"
+  >
+    Register
+  </Link>
+
+  {/* Get Started */}
+  <Link
+    href="/get-started"
+    className="px-5 py-2 font-semibold rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black
+    shadow-lg hover:shadow-xl transition duration-300 hover:scale-105"
+  >
+    Get Started
+  </Link>
+
+</div>
+
 
         {/* ===== Mobile Menu Button ===== */}
         <button
@@ -127,15 +141,30 @@ const Header: React.FC = () => {
             </Link>
           ))}
 
-          <div className="pt-4 border-t mt-4">
-            <Link
-              href="/get-started"
-              className="bg-yellow-400 text-black px-4 py-2 rounded-full text-center font-semibold hover:bg-yellow-500 transition block"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Get Started
-            </Link>
-          </div>
+          <div className="pt-4 border-t mt-4 flex flex-col space-y-3">
+
+  {/* Register */}
+  <Link
+    href="/register"
+    onClick={() => setIsMenuOpen(false)}
+    className="bg-gradient-to-r from-pink-400 to-red-500 text-white px-4 py-2 rounded-full text-center font-semibold
+    shadow-md hover:shadow-lg hover:scale-105 transition"
+  >
+    Register
+  </Link>
+
+  {/* Get Started */}
+  <Link
+    href="/get-started"
+    onClick={() => setIsMenuOpen(false)}
+    className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-center font-semibold
+    shadow-md hover:shadow-lg hover:scale-105 transition"
+  >
+    Get Started
+  </Link>
+
+</div>
+
         </nav>
       </div>
     </header>
@@ -143,5 +172,4 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
 
