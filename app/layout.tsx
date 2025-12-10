@@ -33,7 +33,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <head>
           
         {/* 🔥 Google Analytics */}
-        <script src="https://www.googletagmanager.com/gtag/js?id=G-5XNDPDMWLR" async></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-51JPXLECDD" async></script>
         <script dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
