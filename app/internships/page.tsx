@@ -136,7 +136,7 @@ const InternshipsPage = () => {
       <section className="relative w-full py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">
-            Internships at BrainTrain
+            Internships at Brain Train Consultancy Services LLP
           </h1>
           <p
             className="text-gray-700 mb-16 text-lg md:text-xl max-w-3xl mx-auto"

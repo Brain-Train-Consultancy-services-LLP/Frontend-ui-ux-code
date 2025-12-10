@@ -51,11 +51,11 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           
         
 
-        {/* ✅ reCAPTCHA script safe position 
+        {/* ✅ reCAPTCHA script safe position */}
         <Script
           src="https://www.google.com/recaptcha/api.js"
           strategy="afterInteractive"
-        />*/}
+        />
 
 
         <RegProvider>

@@ -224,7 +224,7 @@ return (
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Choose Registration Type</option>
-                <option value="intern">Portfolio Builder Intern (₹499 / $49)</option>
+                <option value="intern">Portfolio Builder Intern (₹499)</option>
                 <option value="contributor">External Contributor (Free)</option>
               </select>
             </div>
@@ -240,10 +240,10 @@ return (
                   className="w-full border border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 >
                   <option value="">Select Division</option>
-                  <option>AI / ML</option>
-                  <option>Full Stack</option>
-                  <option>Mechanical</option>
-                  <option>Embedded</option>
+                  <option>AI Solutions</option>
+                  <option>Software Development</option>
+                  <option>Data Analytics</option>
+                  <option>Automation & RPA</option>
                 </select>
 
                 <div className="mt-4">
