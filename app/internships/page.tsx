@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import "aos/dist/aos.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
 import { toast } from "sonner";
 
@@ -278,7 +277,7 @@ const InternshipsPage = () => {
         )}
       </section>
 
-      <Footer />
+    
     </div>
   );
 };

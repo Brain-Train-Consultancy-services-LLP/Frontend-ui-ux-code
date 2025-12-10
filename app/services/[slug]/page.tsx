@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { FaBrain, FaLaptopCode, FaChartLine, FaCogs } from "react-icons/fa";
 import Link from "next/link";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+
 
 const servicesDetails = {
   "ai-solutions": {
@@ -178,7 +178,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <Footer />
+    
     </>
   );
 }

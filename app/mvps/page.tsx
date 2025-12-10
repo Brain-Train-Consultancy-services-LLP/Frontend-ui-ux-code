@@ -269,7 +269,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaTools } from "react-icons/fa";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
 
 // Single MVP → Aatmanirbhar MVP
@@ -374,7 +373,7 @@ const MVPsPage = () => {
         </div>
       </section>
 
-      <Footer />
+  
     </div>
   );
 };

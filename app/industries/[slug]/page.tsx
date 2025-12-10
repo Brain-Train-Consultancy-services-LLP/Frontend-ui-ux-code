@@ -4,7 +4,6 @@ import { use } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { Cpu, Activity, Target, TestTube, Microscope, Database, Heart, Stethoscope, Pause, BookOpen, UserCheck, ChartBar } from "lucide-react";
 import Link from "next/link";
 
@@ -373,7 +372,7 @@ export default function IndustryPage(props: any) {
         </div>
       </section>
 
-      <Footer />
+  
     </>
   );
 }
