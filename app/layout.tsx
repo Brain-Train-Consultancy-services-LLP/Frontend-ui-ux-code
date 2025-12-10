@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { RegProvider } from "@/components/register/RegisterContext";
 import Footer from "@/components/Footer"; // ⬅ FOOTER IMPORT KARO
 import Script from "next/script"; 
+import { Analytics } from '@vercel/analytics/next';
 
 const ibmPlexSans = localFont({
   src: [
@@ -64,6 +65,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           {/* MAIN CONTENT */}
           <main className="flex-grow">
             {children}
+            <Analytics />
+
           </main>
 
           {/* FOOTER ALWAYS AT BOTTOM */}
