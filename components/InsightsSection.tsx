@@ -17,14 +17,14 @@ const insights = [
     description:
       "Deep-dive market reports and whitepapers on automation, analytics, and cloud AI. (Coming Soon)",
     icon: <HiDocumentSearch className="text-blue-500" size={34} />,
-    bg: "/assets/images/insights1.png",
+    bg: "/assets/images/insights2.png",
   },
   {
     title: "Automation Case Studies",
     description:
       "Real-world enterprise automation journeys, outcomes, and proven frameworks. (Coming Soon)",
     icon: <HiChartBar className="text-green-500" size={34} />,
-    bg: "/assets/images/insights1.png",
+    bg: "/assets/images/insights3.png",
   },
 ];
 
