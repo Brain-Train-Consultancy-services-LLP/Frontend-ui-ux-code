@@ -281,7 +281,7 @@ const mvp = {
   members: [
     {
       name: "Monika Singh",
-      role: "Founder & Project Lead",
+      role: "Project Leader",
       bio: "Leads AI-first innovation and infra automation for BrainTrain.",
       image: "/assets/images/team5.png",
     },
