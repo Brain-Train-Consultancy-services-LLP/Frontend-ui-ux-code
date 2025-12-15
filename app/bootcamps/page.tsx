@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const BootcampsPage: React.FC = () => {
   const cardsRef = useRef<HTMLDivElement[]>([]);
@@ -116,8 +115,7 @@ const BootcampsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
+    
     </div>
   );
 };
