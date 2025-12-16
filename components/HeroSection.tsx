@@ -36,10 +36,10 @@ const Hero = () => {
                Register
             </Link>
             <Link
-              href="/bootcamps"
+              href="/marketplace"
               className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
             >
-              Join Our Bootcamp
+              Join Our MarketPlace
             </Link>
           </div>
 
@@ -51,9 +51,7 @@ const Hero = () => {
             <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-medium">
               💼 Professional Consulting
             </div>
-            <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-medium">
-              🎓 AI Bootcamps
-            </div>
+            
           </div>
 
           
