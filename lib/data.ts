@@ -83,24 +83,6 @@ export const teamMembers: TeamMember[] = [
     bio: "Expert in frontend development, project management, and client relations.",
     linkedin: "https://linkedin.com/in/monikasinghtech"
   },
-  {
-    id: "manoj",
-    name: "Manoj Kumar Tadekoru",
-    position: "Backend Developer",
-    image: "/assets/images/team3.jpeg",
-    bio: "Backend development specialist with strong expertise in databases and API implementation.",
-    linkedin: "https://linkedin.com/in/manoj-kumar-tadekoru-5a7958216/"
-  },
-  /*
-  {
-    id: "shubham",
-    name: "Shubham Kumar",
-    position: "AI Specialist",
-    image: "/team4.png",
-    bio: "Machine learning engineer focused on practical AI solutions.",
-    linkedin: "https://linkedin.com/in/shubham-kumar-ai"
-  },*/
-  
 ];
 
 // Services data
