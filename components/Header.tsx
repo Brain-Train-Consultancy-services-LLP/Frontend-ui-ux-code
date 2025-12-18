@@ -259,7 +259,6 @@ export default Header;*/
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { FaBars, FaTimes, FaBell } from "react-icons/fa";
 import Logo from "@/public/assets/images/logo.png";
 
@@ -271,16 +270,6 @@ const PUBLIC_NAV = [
   { name: "Home", href: "/" },
   { name: "Internships", href: "/internships" },
   { name: "MVPs", href: "/mvps" },
-  {
-    name: "Marketplace",
-    href: "/marketplace",
-    children: [
-      { name: "Services", href: "/marketplace/services" },
-      { name: "Products", href: "/marketplace/products" },
-      { name: "For Startups", href: "/marketplace/startups" },
-      { name: "For Enterprises", href: "/marketplace/enterprises" },
-    ],
-  },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
@@ -295,10 +284,9 @@ const PUBLIC_ACTIONS = [
 ========================= */
 
 const Header: React.FC = () => {
-  const pathname = usePathname();
+  
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
 
   const lastScrollY = useRef(0);
@@ -319,8 +307,6 @@ const Header: React.FC = () => {
       } else {
         setHideHeader(false);
       }
-
-      setIsScrolled(current > 40);
       lastScrollY.current = current;
     };
 
@@ -365,7 +351,7 @@ const Header: React.FC = () => {
 
     const drawer = drawerRef.current;
     const focusables = drawer.querySelectorAll<HTMLElement>(
-      'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+      'a, button, [tabindex]:not([tabindex="-1"])'
     );
 
     const first = focusables[0];
@@ -397,11 +383,11 @@ const Header: React.FC = () => {
     <>
       {/* HEADER */}
       <header
-  className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-    ${hideHeader ? "-translate-y-full" : "translate-y-0"}
-     bg-white/90 backdrop-blur shadow text-gray-900
-  `}
->
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${hideHeader ? "-translate-y-full" : "translate-y-0"}
+         bg-white/90 backdrop-blur shadow text-gray-900
+       `}
+      >
 
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
@@ -431,28 +417,15 @@ const Header: React.FC = () => {
           {/* DESKTOP NAV */}
           <nav className="hidden lg:flex items-center space-x-8">
             {PUBLIC_NAV.map((item) => (
-              <div key={item.name} className="relative group">
                 <Link
+                  key={item.name}
                   href={item.href}
                   className="font-medium transition hover:text-yellow-300"
                 >
                   {item.name}
                 </Link>
 
-                {item.children && (
-                  <div className="absolute left-0 top-full mt-2 hidden group-hover:block bg-white text-gray-800 shadow rounded w-48">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                
             ))}
           </nav>
 
@@ -539,8 +512,8 @@ const Header: React.FC = () => {
 
         <nav className="flex flex-col space-y-4 px-6 py-6">
           {PUBLIC_NAV.map((item) => (
-            <div key={item.name}>
               <Link
+                key={item.name}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className="font-semibold block"
@@ -548,21 +521,6 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
 
-              {item.children && (
-                <div className="ml-4 mt-2 space-y-2">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.name}
-                      href={child.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-sm text-gray-600"
-                    >
-                      {child.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
           ))}
 
           <div className="pt-4 border-t space-y-3">
