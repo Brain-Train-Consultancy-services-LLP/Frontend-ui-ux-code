@@ -83,6 +83,14 @@ export const teamMembers: TeamMember[] = [
     bio: "Expert in frontend development, project management, and client relations.",
     linkedin: "https://linkedin.com/in/monikasinghtech"
   },
+    {
+    id: "manoj",
+    name: "Manoj Kumar Tadekoru",
+    position: "Backend Developer",
+    image: "/assets/images/team3.jpeg",
+    bio: "Expert in backend development, and client relations.",
+    linkedin: "https://www.linkedin.com/in/manoj-kumar-tadekoru-5a7958216/"
+  },
 ];
 
 // Services data
