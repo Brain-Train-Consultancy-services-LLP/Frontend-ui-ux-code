@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import React from "react";
 import { useEffect, useState } from "react";
 import {
   AiOutlineUser,
@@ -14,13 +15,21 @@ import {
 
 type StepStatus = "completed" | "active" | "locked";
 
+type Step = {
+  label: string;
+  icon: React.ReactNode;
+  status: StepStatus;
+};
+
 export default function TestInstructionsPage() {
   const router = useRouter();
   const [agreed, setAgreed] = useState(false);
   const [personalityPassed, setPersonalityPassed] = useState(false);
 
-  useEffect(() => {
-    const passed = localStorage.getItem("personalityPassed") === "true";
+   useEffect(() => {
+    const passed =
+      typeof window !== "undefined" &&
+      localStorage.getItem("personalityPassed") === "true";
     setPersonalityPassed(passed);
   }, []);
 
@@ -30,7 +39,7 @@ export default function TestInstructionsPage() {
 
   const steps: {
     label: string;
-    icon: JSX.Element;
+    icon: React.ReactNode;
     status: StepStatus;
   }[] = [
     {
