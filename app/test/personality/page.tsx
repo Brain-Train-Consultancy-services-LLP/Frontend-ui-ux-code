@@ -401,17 +401,20 @@ function shuffle<T>(array: T[]): T[] {
 export default function PersonalityTestPage() {
   const router = useRouter();
 
+   /* ---- CONFIG ---- */
   const TIME_PER_QUESTION = 15;
   const PASS_SCORE = 120;
   const MIN_AVG_TIME = 5;
-  const MAX_SAME_OPTION= 10;
+  const MAX_SAME_OPTION = 10;
+  const MAX_TAB_VIOLATIONS = 2;
+  const MAX_REFRESH_ALLOWED = 1;
 
   const [questions, setQuestions] = useState<Question[]>(QUESTIONS);
   const [isReady, setIsReady] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_PER_QUESTION);
-
+  
   const [traitScores, setTraitScores] = useState<Record<Trait, number>>({
     logic: 0,
     leadership: 0,
@@ -424,6 +427,9 @@ export default function PersonalityTestPage() {
   const [optionHistory, setOptionHistory] = useState<string[]>([]);
 
   const questionStartRef = useRef<number>(Date.now());
+   const tabViolationCount = useRef(0);
+  const warnedTab = useRef(false);
+
 
   const currentQuestion = questions[currentIndex];
   const isLast = currentIndex === questions.length - 1;
@@ -436,6 +442,7 @@ export default function PersonalityTestPage() {
   /* ---------------- TIMER ---------------- */
  
   useEffect(() => {
+    if (!isReady) return;
     setTimeLeft(TIME_PER_QUESTION);
     setSelectedOption(null);
     questionStartRef.current = Date.now();
@@ -452,6 +459,77 @@ export default function PersonalityTestPage() {
 
     return () => clearInterval(timer);
   }, [currentIndex]);
+
+   /* ---------------- TAB / WINDOW BLUR DETECTION ---------------- */
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.hidden) {
+        tabViolationCount.current += 1;
+
+        if (!warnedTab.current) {
+          alert("Warning: Tab switching is not allowed during the test.");
+          warnedTab.current = true;
+          return;
+        }
+
+        if (tabViolationCount.current >= MAX_TAB_VIOLATIONS) {
+          alert("Multiple tab switches detected. Test auto-submitted.");
+          finishTest();
+        }
+      }
+    };
+
+     const handleBlur = () => {
+      tabViolationCount.current += 1;
+      if (tabViolationCount.current >= MAX_TAB_VIOLATIONS) {
+        alert("Window focus lost multiple times. Test auto-submitted.");
+        finishTest();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("blur", handleBlur);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("blur", handleBlur);
+    };
+  }, []);
+
+  /* ---------------- REFRESH + BACK BUTTON ---------------- */
+
+  useEffect(() => {
+    const reloadCount = Number(
+      sessionStorage.getItem("reloadCount") || "0"
+    );
+    sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+
+    if (reloadCount >= MAX_REFRESH_ALLOWED) {
+      alert("Multiple refresh attempts detected. Test auto-submitted.");
+      finishTest();
+    }
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    const handlePopState = () => {
+      alert("Back navigation is disabled during the test.");
+      history.pushState(null, "", location.href);
+    };
+
+    history.pushState(null, "", location.href);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
 
   /* ---------------- ACTIONS ---------------- */
 
@@ -544,79 +622,6 @@ export default function PersonalityTestPage() {
 
   const progress =
     ((currentIndex + 1) / questions.length) * 100;
-/*
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
-        
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Personality Assessment
-          </h1>
-
-          <div className="mt-3 h-2 w-full bg-gray-200 rounded">
-            <div
-              className="h-2 bg-blue-600 rounded"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <div className="flex justify-between text-sm text-gray-600 mt-2">
-            <span>
-              Question {currentIndex + 1} of {questions.length}
-            </span>
-            <span className="text-red-600">
-              Time left. {timeLeft}s
-            </span>
-          </div>
-        </div>
-
-    
-        <p className="text-lg font-medium mb-6">
-          {currentQuestion.scenario}
-        </p>
-
-        <div className="space-y-3 mb-8">
-          {currentQuestion.options.map((opt, idx) => (
-            <button
-              key={idx}
-              onClick={() => selectOption(opt)}
-              className={`w-full text-left p-4 border rounded-lg transition ${
-                selectedOption === opt
-                  ? "border-blue-600 bg-blue-50"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-              {opt.text}
-            </button>
-          ))}
-        </div>
-
-       
-        <div className="flex justify-between">
-          <button
-            onClick={finishTest}
-            className="text-sm text-gray-500 hover:underline"
-          >
-            Submit Test
-          </button>
-
-          <button
-            onClick={recordAnswer}
-            disabled={!selectedOption}
-            className={`px-6 py-2 rounded-lg text-white transition ${
-              selectedOption
-                ? "bg-blue-600 hover:bg-blue-700"
-                : "bg-gray-300 cursor-not-allowed"
-            }`}
-          >
-            {isLast ? "Finish" : "Next Question"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}*/
 
 /* ---------------- RENDER ---------------- */
   return (
