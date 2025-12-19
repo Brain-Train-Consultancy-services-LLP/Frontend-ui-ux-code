@@ -79,7 +79,7 @@ export default function TestInstructionsPage() {
           <button
             onClick={handleStartTest}
             disabled={!agreed}
-            className={`px-12 py-3 w-44 rounded-xl text-lg font-semibold transition transform shadow-md ${
+            className={`px-12 py-3  rounded-xl text-lg font-semibold transition transform shadow-md ${
               agreed
                 ? "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
