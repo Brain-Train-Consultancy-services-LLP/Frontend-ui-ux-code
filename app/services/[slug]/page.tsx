@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { FaBrain, FaLaptopCode, FaChartLine, FaCogs } from "react-icons/fa";
 import Link from "next/link";
 import Header from "@/components/Header";
-
+import type { IconType } from "react-icons";
 
 const servicesDetails = {
   "ai-solutions": {
@@ -90,7 +90,7 @@ const servicesDetails = {
     cta: "Unlock Your Data",
   },
 
-  "automation": {
+  automation: {
     title: "Automation",
     icon: FaCogs,
     description:
@@ -121,18 +121,19 @@ const servicesDetails = {
 
 type ServiceSlug = keyof typeof servicesDetails;
 
-interface PageProps {
-  params: {
+type PageProps = {
+  params: Promise<{
     slug: ServiceSlug;
-  };
-}
+  }>;
+};
 
-export default function ServiceDetailPage({ params }: PageProps) {
-  const service = servicesDetails[params.slug];
+export default async function ServiceDetailPage({ params }: PageProps) {
+  const { slug } = await params;
 
-  if (!service) return notFound();
+  const service = servicesDetails[slug];
+  if (!service) notFound();
 
-  const Icon = service.icon;
+  const Icon: IconType = service.icon;
 
   return (
     <>
@@ -152,13 +153,16 @@ export default function ServiceDetailPage({ params }: PageProps) {
           </div>
 
           {/* Sections */}
-          {service.sections.map((sec: any, idx: number) => (
-            <div key={idx} className="bg-white p-8 rounded-2xl shadow-md mb-8">
+          {service.sections.map((sec, idx) => (
+            <div
+              key={idx}
+              className="bg-white p-8 rounded-2xl shadow-md mb-8"
+            >
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 {sec.heading}
               </h2>
               <ul className="space-y-2">
-                {sec.points.map((p: string, i: number) => (
+                {sec.points.map((p, i) => (
                   <li key={i} className="flex items-start text-gray-600">
                     <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2 mr-3" />
                     {p}
@@ -168,17 +172,15 @@ export default function ServiceDetailPage({ params }: PageProps) {
             </div>
           ))}
 
-          {/* CTA Button → Goes to Contact Page */}
+          {/* CTA */}
           <Link
             href="/contact"
-            className="mt-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition"
+            className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition"
           >
             {service.cta} →
           </Link>
         </div>
       </section>
-
-    
     </>
   );
 }
