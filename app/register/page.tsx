@@ -370,7 +370,7 @@ export default function RegisterPage() {
   const [category, setCategory] = useState<CategoryType>("");
   const [cooldown, setCooldown] = useState(0);
   const [emailDomain, setEmailDomain] = useState<string | null>(null);
-
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const recaptchaWidgetRef = useRef<number | null>(null);
 
   /* ----------------------------- */
@@ -422,10 +422,16 @@ export default function RegisterPage() {
       return;
     }
 
+    if (!acceptedTerms) {
+      alert("You must accept the Terms of Service to continue");
+      return;
+    }
+
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
     formData.append("captcha", captchaToken);
+     formData.append("accepted_terms", "true");
 
     try {
       const res = await fetch("http://127.0.0.1:8000/register", {
@@ -564,6 +570,26 @@ export default function RegisterPage() {
 
             <div id="recaptcha-v2-container" className="flex justify-center" />
 
+             {/* Terms */}
+            <div className="flex items-start gap-3 text-sm text-gray-600">
+              <input
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(e) => setAcceptedTerms(e.target.checked)}
+                className="mt-1 h-4 w-4"
+              />
+              <p>
+                I agree to the{" "}
+                <a href="/terms" target="_blank" className="text-blue-700 font-medium">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a href="/privacy" target="_blank" className="text-blue-700 font-medium">
+                  Privacy Policy
+                </a>
+              </p>
+            </div>
+
             <button
               type="submit"
               disabled={loading || cooldown > 0}
@@ -577,7 +603,7 @@ export default function RegisterPage() {
               ) : cooldown > 0 ? (
                 `Retry in ${cooldown}s`
               ) : (
-                "Submit Registration"
+                "Submit"
               )}
             </button>
           </form>
