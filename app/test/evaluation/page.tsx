@@ -1,6 +1,12 @@
 "use client";
 import { useMemo, useState } from "react";
-import PDFPreview from "@/components/pdf/PDFPreview";
+import dynamic from "next/dynamic";
+
+const PDFPreview = dynamic(
+  () => import("@/components/pdf/PDFPreview"),
+  { ssr: false }
+);
+
 import RazorpayButton from "@/components/payment/RazorpayButton";
 
 
