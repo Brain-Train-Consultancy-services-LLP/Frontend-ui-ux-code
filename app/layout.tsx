@@ -1,25 +1,23 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
-import localFont from "next/font/local";
+import { IBM_Plex_Sans, Bebas_Neue } from "next/font/google";
 import { ReactNode } from "react";
 import { RegProvider } from "@/components/register/RegisterContext";
-import Footer from "@/components/Footer"; // ⬅ FOOTER IMPORT KARO
-import Script from "next/script"; 
-import { Analytics } from '@vercel/analytics/next';
+import Footer from "@/components/Footer";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
-const ibmPlexSans = localFont({
-  src: [
-    { path: "/fonts/IBMPlexSans-Regular.ttf", weight: "400", style: "normal" },
-    { path: "/fonts/IBMPlexSans-Medium.ttf", weight: "500", style: "normal" },
-    { path: "/fonts/IBMPlexSans-SemiBold.ttf", weight: "600", style: "normal" },
-    { path: "/fonts/IBMPlexSans-Bold.ttf", weight: "700", style: "normal" },
-  ],
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-const bebasNeue = localFont({
-  src: [{ path: "/fonts/BebasNeue-Regular.ttf", weight: "400", style: "normal" }],
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"],
   variable: "--bebas-neue",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,55 +26,51 @@ export const metadata: Metadata = {
     "Brain Train Consultancy Services LLP empowers organizations with AI-driven business consulting, digital transformation, and corporate training solutions.",
 };
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-        <head>
-          
-        {/* 🔥 Google Analytics */}
-        <script src="https://www.googletagmanager.com/gtag/js?id=G-5XNDPDMWLR" async></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-5XNDPDMWLR');
-          `,
-        }} />
-
-        <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
-      </head>
       <body
         className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased min-h-screen flex flex-col`}
       >
-          
-        
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5XNDPDMWLR"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-5XNDPDMWLR');
+            `,
+          }}
+        />
 
-        {/* ✅ reCAPTCHA script safe position */}
+        {/* Razorpay */}
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="afterInteractive"
+        />
+
+        {/* reCAPTCHA */}
         <Script
           src="https://www.google.com/recaptcha/api.js"
           strategy="afterInteractive"
         />
 
-
         <RegProvider>
-          
-          
-          {/* MAIN CONTENT */}
-          <main className="flex-grow">
-            {children}
-            <Analytics />
-
-          </main>
-
-          {/* FOOTER ALWAYS AT BOTTOM */}
-          <Footer />
-          
+          <main className="flex-grow">{children}</main>
+         
         </RegProvider>
+
+        <Analytics />
       </body>
     </html>
   );
-};
+}
 
-export default RootLayout;
 

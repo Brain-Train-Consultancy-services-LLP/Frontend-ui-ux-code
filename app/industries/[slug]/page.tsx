@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import { Cpu, Activity, Target, TestTube, Microscope, Database, Heart, Stethoscope, Pause, BookOpen, UserCheck, ChartBar } from "lucide-react";
 import Link from "next/link";
-
+import Footer from "@/components/Footer";
 type IndustryKey = "manufacturing" | "biotechnology" | "healthcare" | "education";
 
 const industryData: Record<
@@ -370,9 +370,10 @@ export default function IndustryPage(props: any) {
             </Link>
           </motion.div>
         </div>
+      
       </section>
 
-  
+      <Footer/>
     </>
   );
 }

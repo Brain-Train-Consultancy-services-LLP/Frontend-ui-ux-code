@@ -4,6 +4,7 @@ import { FaBrain, FaLaptopCode, FaChartLine, FaCogs } from "react-icons/fa";
 import Link from "next/link";
 import Header from "@/components/Header";
 import type { IconType } from "react-icons";
+import Footer from "@/components/Footer";
 
 const servicesDetails = {
   "ai-solutions": {
@@ -181,6 +182,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </Link>
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

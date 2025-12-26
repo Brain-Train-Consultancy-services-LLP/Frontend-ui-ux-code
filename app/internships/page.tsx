@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import Header from "@/components/Header";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
 import { toast } from "sonner";
+import Footer from "@/components/Footer";
 
 // Lazy load icons
 const FaLaptopCode = dynamic(() => import("react-icons/fa").then((mod) => mod.FaLaptopCode));
@@ -276,7 +277,7 @@ const InternshipsPage = () => {
           </div>
         )}
       </section>
-
+      <Footer/>
     
     </div>
   );

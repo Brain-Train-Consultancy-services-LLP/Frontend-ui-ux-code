@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import Header from "@/components/Header";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
 import AboutUs from "@/components/AboutUs";
+import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function AboutPage() {
       <main className="pt-20">
         <AboutUs />
       </main>
-      
+      <Footer />
     </div>
   );
 }

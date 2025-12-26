@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
 import { ReactNode } from "react";
 import { RegProvider } from "@/components/register/RegisterContext";
+import Footer from "@/components/Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -20,6 +21,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
             <CookieConsent />
           </div>
         </div>
+
+        <Footer />
       </main>
 
      

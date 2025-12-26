@@ -414,7 +414,7 @@ export default function PersonalityTestPage() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_PER_QUESTION);
-  
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [traitScores, setTraitScores] = useState<Record<Trait, number>>({
     logic: 0,
     leadership: 0,
@@ -423,7 +423,6 @@ export default function PersonalityTestPage() {
   });
 
   const [responseTimes, setResponseTimes] = useState<number[]>([]);
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [optionHistory, setOptionHistory] = useState<string[]>([]);
 
   const questionStartRef = useRef<number>(Date.now());
@@ -458,7 +457,7 @@ export default function PersonalityTestPage() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex , isReady]);
 
    /* ---------------- TAB / WINDOW BLUR DETECTION ---------------- */
 
@@ -474,7 +473,6 @@ export default function PersonalityTestPage() {
         }
 
         if (tabViolationCount.current >= MAX_TAB_VIOLATIONS) {
-          alert("Multiple tab switches detected. Test auto-submitted.");
           finishTest();
         }
       }
@@ -483,7 +481,6 @@ export default function PersonalityTestPage() {
      const handleBlur = () => {
       tabViolationCount.current += 1;
       if (tabViolationCount.current >= MAX_TAB_VIOLATIONS) {
-        alert("Window focus lost multiple times. Test auto-submitted.");
         finishTest();
       }
     };
@@ -506,36 +503,23 @@ export default function PersonalityTestPage() {
     sessionStorage.setItem("reloadCount", String(reloadCount + 1));
 
     if (reloadCount >= MAX_REFRESH_ALLOWED) {
-      alert("Multiple refresh attempts detected. Test auto-submitted.");
       finishTest();
     }
 
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+    const preventNav = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = "";
     };
 
-    const handlePopState = () => {
-      alert("Back navigation is disabled during the test.");
-      history.pushState(null, "", location.href);
-    };
+     history.pushState(null, "", location.href);
+    window.addEventListener("beforeunload", preventNav);
 
-    history.pushState(null, "", location.href);
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("popstate", handlePopState);
-    };
+    return () => window.removeEventListener("beforeunload", preventNav);
   }, []);
 
+  /* ---------------- ANSWERS ---------------- */
 
-  /* ---------------- ACTIONS ---------------- */
-
-  const selectOption = (opt: Option) => {
-    setSelectedOption(opt);
-  };
+  const selectOption = (opt: Option) => setSelectedOption(opt);
 
   const recordAnswer = () => {
     if (!selectedOption) return;
@@ -544,46 +528,41 @@ export default function PersonalityTestPage() {
       (Date.now() - questionStartRef.current) / 1000
     );
 
-    setResponseTimes((prev) => [...prev, timeTaken]);
-    setOptionHistory((prev) => [...prev, selectedOption.text]);
+    setResponseTimes((p) => [...p, timeTaken]);
+    setOptionHistory((p) => [...p, selectedOption.text]);
 
-    setTraitScores((prev) => ({
-      ...prev,
-      [selectedOption.trait]:
-        prev[selectedOption.trait] + selectedOption.weight,
+    setTraitScores((p) => ({
+      ...p,
+      [selectedOption.trait]: p[selectedOption.trait] + selectedOption.weight,
     }));
 
     nextQuestion();
   };
 
   const forceNext = () => {
-    setResponseTimes((prev) => [...prev, TIME_PER_QUESTION]);
+    setResponseTimes((p) => [...p, TIME_PER_QUESTION]);
     nextQuestion();
   };
 
   const nextQuestion = () => {
-    if (isLast) {
-      finishTest();
-    } else {
-      setCurrentIndex((i) => i + 1);
-    }
+    if (isLast) finishTest();
+    else setCurrentIndex((i) => i + 1);
   };
 
-  /* ---------------- ANTI RANDOM CLICK ---------------- */
+  /* ---------------- SUSPICIOUS CHECK ---------------- */
 
   const isSuspicious = () => {
-    if (responseTimes.length === 0) return false;
+    if (responseTimes.length === 0) return true;
 
     const avgTime =
-      responseTimes.reduce((a, b) => a + b, 0) /
-      responseTimes.length;
+      responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length;
 
-    const counts = optionHistory.reduce((acc: Record<string, number>, o) => {
-      acc[o] = (acc[o] || 0) + 1;
-      return acc;
+    const counts = optionHistory.reduce<Record<string, number>>((a, o) => {
+      a[o] = (a[o] || 0) + 1;
+      return a;
     }, {});
 
-     const mostRepeated = Math.max(...Object.values(counts));
+    const mostRepeated = Math.max(...Object.values(counts));
 
     return avgTime < MIN_AVG_TIME || mostRepeated >= MAX_SAME_OPTION;
   };
@@ -591,92 +570,104 @@ export default function PersonalityTestPage() {
   /* ---------------- FINISH ---------------- */
 
   const finishTest = () => {
-    const totalScore = Object.values(traitScores).reduce(
-      (a, b) => a + b,
-      0
-    );
+    const totalScore = Object.values(traitScores).reduce((a, b) => a + b, 0);
+
+    const avgResponseTime =
+      responseTimes.length > 0
+        ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length
+        : 0;
 
     const payload = {
       traitScores,
       totalScore,
-      avgResponseTime:
-        responseTimes.reduce((a, b) => a + b, 0) /
-        responseTimes.length,
+      avgResponseTime,
       suspicious: isSuspicious(),
     };
 
-    localStorage.setItem(
-      "personalityResult",
-      JSON.stringify(payload)
-    );
+    localStorage.setItem("personalityResult", JSON.stringify(payload));
 
     if (payload.suspicious || totalScore < PASS_SCORE) {
       router.push("/test/personality-failed");
       return;
     }
 
-    router.push("/test/coding");
+    const division = localStorage.getItem("division");
+
+    switch (division) {
+      case "Software Development":
+        router.push("/test/coding");
+        break;
+      case "AI / ML":
+        router.push("/test/ai-ml");
+        break;
+      case "Data Analytics":
+        router.push("/test/data-analytics");
+        break;
+      case "Automation":
+        router.push("/test/automation");
+        break;
+      default:
+        router.push("/test/selection-error");
+    }
   };
 
   /* ---------------- UI ---------------- */
 
   const progress =
-    ((currentIndex + 1) / questions.length) * 100;
+    questions.length > 0
+      ? ((currentIndex + 1) / questions.length) * 100
+      : 0;
 
-/* ---------------- RENDER ---------------- */
+  if (!isReady) {
+    return <p className="text-center mt-20">Loading assessment…</p>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
-        {!isReady && <p className="text-gray-500">Loading assessment…</p>}
+        <h1 className="text-2xl font-semibold mb-4">Personality Assessment</h1>
 
-        {isReady && (
-          <>
-            {/* Header */}
-            <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-900">Personality Assessment</h1>
-              <div className="mt-3 h-2 w-full bg-gray-200 rounded">
-                <div className="h-2 bg-blue-600 rounded" style={{ width: `${progress}%` }} />
-              </div>
-              <div className="flex justify-between text-sm text-gray-600 mt-2">
-                <span>Question {currentIndex + 1} of {questions.length}</span>
-                <span className="text-red-600">Time left. {timeLeft}s</span>
-              </div>
-            </div>
+        <div className="h-2 bg-gray-200 rounded mb-4">
+          <div className="h-2 bg-blue-600 rounded" style={{ width: `${progress}%` }} />
+        </div>
 
-            {/* Question */}
-            <p className="text-lg font-medium mb-6">{currentQuestion.scenario}</p>
+        <div className="flex justify-between text-sm mb-6">
+          <span>Question {currentIndex + 1} of {questions.length}</span>
+          <span className="text-red-600">Time left. {timeLeft}s</span>
+        </div>
 
-            <div className="space-y-3 mb-8">
-              {currentQuestion.options.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => selectOption(opt)}
-                  className={`w-full text-left p-4 border rounded-lg transition ${
-                    selectedOption === opt ? "border-blue-600 bg-blue-50" : "hover:bg-gray-50"
-                  }`}
-                >
-                  {opt.text}
-                </button>
-              ))}
-            </div>
+        <p className="text-lg font-medium mb-6">{currentQuestion.scenario}</p>
 
-            {/* Actions */}
-            <div className="flex justify-between">
-              <button onClick={finishTest} className="text-sm text-gray-500 hover:underline">
-                Submit Test
-              </button>
-              <button
-                onClick={recordAnswer}
-                disabled={!selectedOption}
-                className={`px-6 py-2 rounded-lg text-white transition ${
-                  selectedOption ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-300 cursor-not-allowed"
-                }`}
-              >
-                {isLast ? "Finish" : "Next Question"}
-              </button>
-            </div>
-          </>
-        )}
+        <div className="space-y-3 mb-8">
+          {currentQuestion.options.map((opt, idx) => (
+            <button
+              key={idx}
+              onClick={() => selectOption(opt)}
+              className={`w-full text-left p-4 border rounded-lg ${
+                selectedOption === opt
+                  ? "border-blue-600 bg-blue-50"
+                  : "hover:bg-gray-50"
+              }`}
+            >
+              {opt.text}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex justify-between">
+          <button onClick={finishTest} className="text-sm text-gray-500 hover:underline">
+            Submit Test
+          </button>
+          <button
+            onClick={recordAnswer}
+            disabled={!selectedOption}
+            className={`px-6 py-2 rounded-lg text-white ${
+              selectedOption ? "bg-blue-600" : "bg-gray-300"
+            }`}
+          >
+            {isLast ? "Finish" : "Next"}
+          </button>
+        </div>
       </div>
     </div>
   );
