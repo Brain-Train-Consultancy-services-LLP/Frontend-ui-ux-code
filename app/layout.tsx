@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { IBM_Plex_Sans, Bebas_Neue } from "next/font/google";
 import { ReactNode } from "react";
-import { RegProvider } from "@/components/register/RegisterContext";
-import Footer from "@/components/Footer";
+import { AuthProvider } from "@/app/context/AuthContext";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -62,10 +61,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           strategy="afterInteractive"
         />
 
-        <RegProvider>
+        <AuthProvider>
           <main className="flex-grow">{children}</main>
          
-        </RegProvider>
+        </AuthProvider>
 
         <Analytics />
       </body>

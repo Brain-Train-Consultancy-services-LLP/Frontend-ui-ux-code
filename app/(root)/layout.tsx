@@ -3,7 +3,7 @@
 import Header from "@/components/Header";
 import CookieConsent from "@/components/CookieConsent";
 import { ReactNode } from "react";
-import { RegProvider } from "@/components/register/RegisterContext";
+import { AuthProvider } from "@/app/context/AuthContext";
 import Footer from "@/components/Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -14,9 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <Header />
           
           <div className="mt-20 pb-20">
-              <RegProvider>
-              {children}
-            </RegProvider>
+             <AuthProvider>{children}</AuthProvider>
           
             <CookieConsent />
           </div>
