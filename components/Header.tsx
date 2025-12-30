@@ -337,6 +337,7 @@ const Header: React.FC = () => {
       document.body.style.left = "";
       document.body.style.right = "";
       document.body.style.width = "";
+      document.body.style.overflowX = "hidden";
 
       window.scrollTo(0, parseInt(y || "0") * -1);
     };

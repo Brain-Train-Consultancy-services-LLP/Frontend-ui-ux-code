@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { AuthProvider } from "@/app/context/AuthContext";
 import Footer from "@/components/Footer";
 
+
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
 
