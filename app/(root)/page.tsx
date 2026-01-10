@@ -12,6 +12,7 @@ import Industries from "@/components/Industries";
 import Testimonials from "@/components/Testimonials";
 import Insights from "@/components/InsightsSection";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
+import PastTeamSuccess from "@/components/PastTeamSuccess";
 
 export default function Home() {
   useEffect(() => {
@@ -46,6 +47,10 @@ export default function Home() {
 
         <section data-aos="fade-up" className="w-full">
           <Industries />
+        </section>
+
+        <section data-aos="fade-up" className="w-full">
+          <PastTeamSuccess />
         </section>
 
         <section data-aos="fade-up" className="w-full">

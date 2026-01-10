@@ -65,24 +65,59 @@ export interface BlogPost {
   slug: string;
 }
 
+export interface PastTeamMember {
+  id: string;
+  name: string;
+  alumni: string;
+  placedAt: string;
+}
+
+export const pastTeamSuccess: PastTeamMember[] = [
+  {
+    id: "1",
+    name: "Pawan Uikey",
+    alumni: "NIT Jalandhar",
+    placedAt: "TCS",
+  },
+  {
+    id: "2",
+    name: "Ankit Gopi Gahnoliya",
+    alumni: "LPU",
+    placedAt: "Infosys",
+  },
+  {
+    id: "3",
+    name: "Rohit Lodhi",
+    alumni: "DTU",
+    placedAt: "Accenture",
+  },
+   {
+    id: "4",
+    name: "Shubham Kumar",
+    alumni: "DTU",
+    placedAt: "Accenture",
+  },
+];
+
 // Team data
 export const teamMembers: TeamMember[] = [
   {
     id: "rajendran",
-    name: "Rajendran Mariagnanam",
+    name: "Major Rajendran Mariagnanam Retd",
     position: "CEO & Founder",
     image: "/assets/images/team1.jpeg",
     bio: "Visionary leader with 15+ years in AI and business consulting.",
     linkedin: "https://linkedin.com/in/rajendranm"
   },
   {
-    id: "monika",
-    name: "Monika Singh",
-    position: "Frontend Developer, Project Manager",
-    image: "/assets/images/team5.png",
-    bio: "Expert in frontend development, project management, and client relations.",
-    linkedin: "https://linkedin.com/in/monikasinghtech"
-  },
+  id: "monika",
+  name: "Monika Singh",
+  position: "Software Developer",
+  image: "/assets/images/team2.jpeg",
+  bio: "B.Tech Biotechnology graduate from NIT Jalandhar with strong interest in AI, ML, and web development. Contributes to software development and project execution at Brain Train Consultancy Services LLP.",
+  linkedin: "https://linkedin.com/in/monikasinghtech"
+},
+
     {
     id: "manoj",
     name: "Manoj Kumar Tadekoru",
