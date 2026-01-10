@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
 
         {/* Top Section: Brand + Links */}
-        <div className="grid grid-cols-1 md:grid-cols-5  gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10">
 
           {/* Brand */}
 <div className="flex flex-col items-start ">
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
       alt="Brain Train Logo"
       className="rounded-full w-12 h-12 mr-2"
     />
-    <div className="flex flex-col whitespace-nowrap">
+    <div className="flex flex-col ">
       <h2 className="text-2xl font-bold ">
         Brain Train
       </h2>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
   </div>
 
   {/* Description */}
-  <p className="text-gray-300 text-sm leading-relaxed mt-2">
+  <p className="text-gray-300 text-sm leading-relaxed mt-2 max-w-sm">
     Empowering businesses and students with AI-driven solutions, 
     MVP development, and professional consulting services.
   </p>
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold mb-4">Who we are</h3>
             <ul className="space-y-2 text-gray-300 text-sm">
               <li><a href="/about" className="hover:text-cyan-400">About BrainTrain</a></li>
-              <li><a href="#" className="hover:text-cyan-400">Locations</a></li>
+              <li><a href="/transparency" className="hover:text-cyan-400">Transparency</a></li>
             </ul>
           </div>
 
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Section: Social + Links + Copyright */}
-        <div className="border-t border-gray-600 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        <div className="border-t border-gray-600 mt-10 pt-6 flex flex-col gap-4 md:flex-row md:justify-between md:items-center text-sm text-gray-400">
 
           {/* Social Icons */}
           <div className="flex space-x-5 mb-4 md:mb-0">

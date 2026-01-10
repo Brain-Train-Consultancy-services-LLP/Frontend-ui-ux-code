@@ -64,52 +64,54 @@ import HeroImage from "@/public/assets/images/hero-ai.png";
 
 const Hero = () => {
   return (
-    <section className="relative w-full overflow-x-hidden bg-gradient-to-br from-[#050b2c] via-[#08144a] to-[#020617] text-white">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#050b2c] via-[#08144a] to-[#020617] text-white">
 
-      {/* Background decoration layer */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute right-0 top-0 h-full w-[55%]  max-w-[800px] bg-gradient-to-l from-blue-500/20 via-indigo-500/10 to-transparent clip-path-diagonal" />
+      {/* Background diagonal */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute right-0 top-0 h-full w-[65%] bg-gradient-to-l from-blue-500/20 via-indigo-500/10 to-transparent clip-path-diagonal" />
       </div>
 
-      {/* Content container */}
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-24">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+      {/* FULL WIDTH WRAPPER */}
+      <div className="relative  py-28">
 
-          {/* Left Content */}
+        {/* CONTROLLED CONTENT WIDTH */}
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-20 flex flex-col lg:flex-row items-center gap-20">
+
+          {/* Left */}
           <div className="w-full lg:w-1/2 space-y-7 text-center lg:text-left">
 
-            <span className="inline-block text-xs sm:text-sm font-semibold tracking-widest text-blue-300 uppercase">
+            <span className="text-xs sm:text-sm font-semibold tracking-widest text-blue-300 uppercase">
               Brain Train Consultancy Services LLP
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-              Enterprise AI &
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+              Enterprise AI &  
               <span className="block">Technology Consulting</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-blue-100 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg text-blue-100 max-w-xl mx-auto lg:mx-0">
               We help enterprises and institutions harness artificial intelligence,
               automation, and modern platforms to drive measurable business outcomes
               with confidence and scale.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center lg:justify-start">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-cyan-400 text-[#020617] font-semibold px-7 py-3.5 rounded-full hover:bg-cyan-300 transition w-full sm:w-auto"
+                className="bg-cyan-400 text-[#020617] font-semibold px-8 py-4 rounded-full hover:bg-cyan-300 transition"
               >
                 Explore Our Capabilities →
               </Link>
 
               <Link
                 href="/marketplace"
-                className="text-blue-200 hover:text-white underline underline-offset-4 transition"
+                className="text-blue-200 underline underline-offset-4 hover:text-white"
               >
                 View Solutions
               </Link>
             </div>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-3 pt-8 text-sm text-blue-200">
+            <div className="flex flex-wrap gap-6 pt-8 text-sm text-blue-200 justify-center lg:justify-start">
               <span>AI & Automation</span>
               <span>Enterprise Platforms</span>
               <span>Consulting & Delivery</span>
@@ -117,12 +119,12 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Visual */}
+          {/* Right */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
             <Image
               src={HeroImage}
               alt="Enterprise AI Innovation"
-              className="w-full max-w-sm sm:max-w-md lg:max-w-lg"
+              className="w-full max-w-xl"
               priority
             />
           </div>

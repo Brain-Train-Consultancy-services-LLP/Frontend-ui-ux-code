@@ -100,7 +100,7 @@ const AboutUs: React.FC = () => {
             About Us
           </motion.h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
             {/* Vision */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -108,7 +108,7 @@ const AboutUs: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200">
+              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200 h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
                     Our Vision
@@ -129,13 +129,13 @@ const AboutUs: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <Card className="bg-white p-6 rounded-3xl shadow border border-gray-200 max-h-[650px] overflow-y-auto">
+              <Card className="bg-white p-6 rounded-3xl shadow border border-gray-200 h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold text-gray-800 mb-6 text-center">
                     Meet Our Team
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1 overflow-y-auto">
                   {loading ? (
                     <div className="space-y-4">
                       {Array.from({ length: 5 }).map((_, idx) => (
@@ -166,7 +166,7 @@ const AboutUs: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200">
+              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200  h-full flex flex-col" >
                 <CardHeader>
                   <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
                     Our Mission
