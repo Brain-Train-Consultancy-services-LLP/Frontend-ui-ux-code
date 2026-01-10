@@ -1,24 +1,16 @@
 import type { NextConfig } from "next";
-
+import path from "path";
 const nextConfig: NextConfig = {
    // ------ FIX: Disable ESLint during production build ------
   eslint: {
     ignoreDuringBuilds: true,
   },
   // Enable experimental features for better performance
-  experimental: {
-    optimizePackageImports: ['react-icons', 'lucide-react'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+ experimental: {
+    optimizePackageImports: ["react-icons", "lucide-react"],
   },
 
-
+    outputFileTracingRoot: path.join(__dirname),
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -99,10 +91,7 @@ const nextConfig: NextConfig = {
     return config;
   },
 
-  // Environment variables
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
-  },
+  
 
   // Redirects for SEO
   async redirects() {
@@ -115,15 +104,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Rewrites for API routes
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/:path*',
-      },
-    ];
-  },
 };
 
 export default nextConfig;
