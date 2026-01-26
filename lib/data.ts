@@ -117,7 +117,7 @@ export const teamMembers: TeamMember[] = [
   bio: "B.Tech Biotechnology graduate from NIT Jalandhar with strong interest in AI, ML, and web development. Contributes to software development and project execution at Brain Train Consultancy Services LLP.",
   linkedin: "https://linkedin.com/in/monikasinghtech"
 },
-
+/*
     {
     id: "manoj",
     name: "Manoj Kumar Tadekoru",
@@ -125,7 +125,7 @@ export const teamMembers: TeamMember[] = [
     image: "/assets/images/team3.jpeg",
     bio: "Expert in backend development, and client relations.",
     linkedin: "https://www.linkedin.com/in/manoj-kumar-tadekoru-5a7958216/"
-  },
+  },*/
 ];
 
 // Services data

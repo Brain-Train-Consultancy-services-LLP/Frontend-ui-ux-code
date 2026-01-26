@@ -83,7 +83,8 @@ export default function RegisterPage() {
     const formData = new FormData(e.currentTarget);
     formData.append("captcha", captchaToken);
     formData.append("accepted_terms", "true");
-
+        formData.append("consent_version", "v1.0");
+    formData.append("consent_timestamp", new Date().toISOString());
     try {
       const res = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
@@ -128,15 +129,14 @@ export default function RegisterPage() {
         </div>
 
          {success ? (
-          <div className="text-center">
-            <h2 className="text-xl font-semibold">
-              Check your email for verification
-            </h2>
+           <div className="text-center text-green-700 font-medium">
+            Registration submitted successfully. You may be contacted shortly.
           </div>
         ) : (
-          /* ----------------------------- */
-          /* Form */
-          /* ----------------------------- */
+          <>
+          {/* ----------------------------- */}
+          {/* Form */}
+         { /* ----------------------------- */}
           <form onSubmit={handleSubmit} className="space-y-5">
 
             {/* Honeypot */}
@@ -203,26 +203,32 @@ export default function RegisterPage() {
 
             <div id="recaptcha-v2-container" className="flex justify-center" />
 
-             {/* Terms */}
-            <div className="flex items-start gap-3 text-sm text-gray-600">
-              <input
-                type="checkbox"
-                checked={acceptedTerms}
-                onChange={(e) => setAcceptedTerms(e.target.checked)}
-                className="mt-1 h-4 w-4"
-              />
-              <p>
-                I agree to the{" "}
-                <a href="/terms" target="_blank" className="text-blue-700 font-medium">
-                  Terms of Service
-                </a>{" "}
-                and{" "}
-                <a href="/privacy" target="_blank" className="text-blue-700 font-medium">
-                  Privacy Policy
-                </a>
-              </p>
-            </div>
-
+    
+          {/* DIGITAL CONSENT SECTION */}
+              <div className="flex items-start gap-3 text-sm text-gray-600">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  className="mt-1 h-4 w-4"
+                />
+                <p>
+                  I hereby confirm that the information provided by me is true
+                  and accurate. I voluntarily apply for internship or contributor
+                  engagement with Brain Train Consultancy Services LLP.
+                  I understand that this is not an employment offer.
+                  By submitting this form, I provide my electronic consent and
+                  agree to the{" "}
+                  <a href="/terms" target="_blank" className="text-blue-700 font-medium">
+                    Terms of Service
+                  </a>{" "}
+                  and{" "}
+                  <a href="/privacy" target="_blank" className="text-blue-700 font-medium">
+                    Privacy Policy
+                  </a>.
+                </p>
+              </div>  
+         
             <button
               type="submit"
               disabled={loading || cooldown > 0}
@@ -240,7 +246,21 @@ export default function RegisterPage() {
               )}
             </button>
           </form>
+
+          {/* GOOGLE FORM EMBED SECTION */}
+            <div className="mt-12 border border-gray-200 rounded-lg overflow-hidden">
+              <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSeOAv3R45AJWwtZKVWvUdjzELgRcF1vKetuiuT53rWkkhgoPg/viewform?embedded=true"
+                width="100%"
+                height="900"
+                frameBorder="0"
+              >
+                Loading…
+              </iframe>
+            </div>
+             </>
         )}
+       
       </div>
     </div>
   );
