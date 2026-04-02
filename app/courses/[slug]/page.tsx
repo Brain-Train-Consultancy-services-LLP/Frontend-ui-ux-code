@@ -2,15 +2,19 @@ import { courses } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export default function CourseDetail({ params }: Props) {
+export default async function CourseDetail({ params }: Props) {
+  const { slug } = await params;
+
   const course = courses.find(
-    (c) => c.slug === params.slug
+    (c) => c.slug === slug
   );
 
   if (!course) return notFound();
+
+
 
   return (
     <div className="min-h-screen bg-white pt-28 pb-20">
