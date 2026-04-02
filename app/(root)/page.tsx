@@ -12,7 +12,10 @@ import Industries from "@/components/Industries";
 import Testimonials from "@/components/Testimonials";
 import Insights from "@/components/InsightsSection";
 import ScrollIndicator from "@/components/ui/scroll-indicator";
-import PastTeamSuccess from "@/components/PastTeamSuccess";
+import CeoNotePreview  from "@/components/CeoNotePreview";
+import InnovationLabProjects from "@/components/InnovationLabProjects";
+import TalentEcosystemImpact from "@/components/TalentEcosystemImpact";
+
 
 export default function Home() {
   useEffect(() => {
@@ -50,7 +53,16 @@ export default function Home() {
         </section>
 
         <section data-aos="fade-up" className="w-full">
-          <PastTeamSuccess />
+          <InnovationLabProjects />
+        </section>
+
+
+        <section data-aos="fade-up" className="w-full">
+          <TalentEcosystemImpact />
+        </section>
+
+         <section data-aos="fade-up" className="w-full">
+            <CeoNotePreview />
         </section>
 
         <section data-aos="fade-up" className="w-full">

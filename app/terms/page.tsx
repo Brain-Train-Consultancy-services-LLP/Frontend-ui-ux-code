@@ -1,160 +1,159 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import {
+  TOS_TITLE,
+  TOS_TEXT,
+  TOS_VERSION,
+  TOS_META,
+} from "@/legal/tos/tos-2026-02-02";
+
+
+
 export default function TermsPage() {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    const handleScroll = () => {
+      const threshold = 10;
+      if (el.scrollHeight - el.scrollTop - el.clientHeight < threshold) {
+        setHasScrolledToBottom(true);
+      }
+    };
+
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
+
+ const handleAccept = () => {
+    const consentPayload = {
+      tosVersion: TOS_VERSION,
+      acceptedAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem("tosAccepted", "true");
+    localStorage.setItem("tosMeta", JSON.stringify(consentPayload));
+
+    setAccepted(true);
+     // optional UX
+  setTimeout(() => {
+    window.close(); // if opened in new tab
+  }, 500);
+  };
+
+  const handleDownloadPDF = async () => {
+    const { jsPDF } = await import("jspdf");
+    const pdf = new jsPDF("p", "pt", "a4");
+
+    const text = `
+${TOS_TITLE}
+Version. ${TOS_VERSION}
+Company. ${TOS_META.company}
+
+${TOS_TEXT}
+`;
+
+    pdf.text(text, 40, 40, { maxWidth: 515 });
+    pdf.save(`BrainTrain-TOS-${TOS_VERSION}.pdf`);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-6 py-12 bg-white shadow-sm border border-gray-200 rounded-lg">
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow border border-gray-200">
 
         {/* Header */}
-        <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-          Terms of Service
-        </h1>
+        <div className="px-8 py-6 border-b">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            {TOS_TITLE}
+          </h1>
 
-        <p className="text-sm text-gray-500 mb-6">
-          Brain Train Consultancy Services LLP
-          <br />
-          Last updated. 23 December 2025
-        </p>
-
-        <div className="h-px bg-gray-200 mb-6" />
-
-        {/* Intro */}
-        <p className="text-sm text-gray-700 leading-relaxed mb-8">
-          By accessing or registering on the Brain Train Consultancy Services LLP
-          platform, you agree to the following Terms of Service. If you do not
-          agree, you must not proceed with registration or use the platform.
-        </p>
-
-        {/* 1 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            1. Eligibility
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            This platform is intended for individuals applying as interns,
-            contributors, or authorized collaborators. By registering, you
-            confirm that the information provided is accurate and complete.
+          <p className="text-sm text-gray-600 mt-1">
+            {TOS_META.company}
           </p>
-        </section>
 
-        {/* 2 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            2. Account Responsibility
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            You are responsible for maintaining the confidentiality of your
-            account credentials. Any activity performed through your account
-            will be considered your responsibility.
+          <p className="text-xs text-gray-500 mt-1">
+            Version. {TOS_VERSION} · Governing Law. {TOS_META.governingLaw} ·
+            Jurisdiction. {TOS_META.jurisdiction}
           </p>
-        </section>
+        </div>
 
-        {/* 3 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            3. Acceptable Use
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            You agree not to misuse the platform. This includes unauthorized
-            access, data scraping, sharing credentials, submitting false
-            information, or violating applicable laws and organizational
-            policies.
+        {/* Scrollable content */}
+        <div
+          ref={contentRef}
+          className="h-[60vh] overflow-y-auto px-8 py-6 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap"
+        >
+          {TOS_TEXT}
+        </div>
+
+        {/* Action area */}
+        <div className="px-8 py-6 border-t bg-gray-50 rounded-b-xl space-y-4">
+
+          {/* Checkbox */}
+          <div className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              disabled={!hasScrolledToBottom}
+              checked={checked}
+              onChange={(e) => setChecked(e.target.checked)}
+              className="mt-1 h-4 w-4"
+            />
+
+            <label className="text-sm text-gray-700">
+              I have read, understood, and agree to the Master Terms of Service,
+              including Internship, Contributor, Trainer, Mentor & Developer
+              Agreement, Revenue Share, Code of Conduct, NDA, Intellectual
+              Property, Taxation, Termination, and Disclaimer clauses.
+            </label>
+          </div>
+
+          {!hasScrolledToBottom && (
+            <p className="text-xs text-gray-500">
+              Please scroll to the bottom to enable acceptance.
+            </p>
+          )}
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <button
+              onClick={handleAccept}
+              disabled={!checked || accepted}
+              className={`px-6 py-2 rounded-md text-sm font-medium transition
+                ${
+                  checked && !accepted
+                    ? "bg-black text-white hover:bg-gray-800"
+                    : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                }`}
+            >
+              I Accept & Continue
+            </button>
+
+            <button
+              onClick={handleDownloadPDF}
+              disabled={!accepted}
+              className={`px-6 py-2 rounded-md text-sm font-medium border transition
+                ${
+                  accepted
+                    ? "border-gray-300 text-gray-700 hover:bg-gray-100"
+                    : "border-gray-200 text-gray-400 cursor-not-allowed"
+                }`}
+            >
+              Download Accepted PDF
+            </button>
+          </div>
+
+          {/* Legal note */}
+          <p className="text-xs text-gray-500 pt-2">
+            Acceptance is recorded electronically and is legally binding under
+            the Information Technology Act, 2000.
           </p>
-        </section>
-
-        {/* 4 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            4. Verification and Access
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            Registration does not guarantee access. Brain Train Consultancy
-            Services LLP reserves the right to approve, reject, suspend, or
-            revoke access at its discretion, including after verification.
-          </p>
-        </section>
-
-        {/* 5 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            5. Data Collection
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            We collect and process personal data such as name, email address,
-            GitHub profile, and availability solely for onboarding, evaluation,
-            and organizational purposes. Data is handled in accordance with our
-            Privacy Policy.
-          </p>
-        </section>
-
-        {/* 6 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            6. Security
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            You agree to comply with all security requirements, including
-            authentication mechanisms and access controls. Any attempt to
-            bypass security measures may result in immediate termination of
-            access.
-          </p>
-        </section>
-
-        {/* 7 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            7. Intellectual Property
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            All platform content, internal tools, and materials provided are
-            the intellectual property of Brain Train Consultancy Services LLP.
-            Unauthorized use or distribution is prohibited.
-          </p>
-        </section>
-
-        {/* 8 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            8. Limitation of Liability
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            The platform is provided on an as is basis. Brain Train Consultancy
-            Services LLP shall not be liable for any indirect, incidental, or
-            consequential damages arising from platform usage.
-          </p>
-        </section>
-
-        {/* 9 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            9. Termination
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            We reserve the right to terminate or restrict access at any time
-            without prior notice if these Terms are violated.
-          </p>
-        </section>
-
-        {/* 10 */}
-        <section className="mb-7">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            10. Changes to Terms
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            These Terms may be updated periodically. Continued use of the
-            platform after changes constitutes acceptance of the updated
-            Terms.
-          </p>
-        </section>
-
-        {/* 11 */}
-        <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            11. Governing Law
-          </h2>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            These Terms shall be governed by the laws of India.
-          </p>
-        </section>
-
+        </div>
       </div>
     </div>
   );

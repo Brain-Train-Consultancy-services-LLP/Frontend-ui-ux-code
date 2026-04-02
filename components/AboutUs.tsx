@@ -1,4 +1,4 @@
-
+/*
 "use client";
 
 import { teamApi } from "@/lib/api";
@@ -36,7 +36,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => (
       <h3 className="text-gray-800 font-semibold flex items-center gap-2">
         {member.name}
 
-        {/* LinkedIn Icon */}
+        
         {member.linkedin && (
           <a
             href={member.linkedin}
@@ -101,7 +101,7 @@ const AboutUs: React.FC = () => {
           </motion.h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
-            {/* Vision */}
+            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ const AboutUs: React.FC = () => {
               </Card>
             </motion.div>
 
-            {/* Team */}
+           
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -159,7 +159,7 @@ const AboutUs: React.FC = () => {
               </Card>
             </motion.div>
 
-            {/* Mission */}
+          
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -179,6 +179,84 @@ const AboutUs: React.FC = () => {
                 </CardContent>
               </Card>
             </motion.div>
+          </div>
+        </div>
+      </section>
+    </ErrorBoundary>
+  );
+};
+
+export default AboutUs;
+
+
+*/
+"use client";
+
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
+import { ErrorBoundary } from "./ui/error-boundary";
+import { motion } from "framer-motion";
+
+// -------------------- ABOUT US PAGE --------------------
+const AboutUs: React.FC = () => {
+  return (
+    <ErrorBoundary>
+      <section className="py-24 bg-gray-50 relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-16"
+          >
+            About Us
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+            {/* Vision */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200 h-full">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
+                    Our Vision
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent>
+                  <CardDescription className="text-gray-600 text-lg leading-relaxed">
+                    To build an ecosystem where AI augments society by creating more opportunities and jobs, rather than replacing them.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Mission */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="bg-white p-8 rounded-3xl shadow border border-gray-200 h-full">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-gray-800 mb-4">
+                    Our Mission
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent>
+                  <CardDescription className="text-gray-600 text-lg leading-relaxed">
+                    To create a SaaS-based ecosystem that guides young talent through learning and developing MVPs in AI/ML, core engineering, biotechnology, and beyond. We aim to enhance the skills of engineers, nurture world-class professionals, and contribute to India’s self-reliance under the Atmanirbhar Bharat initiative.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
+
           </div>
         </div>
       </section>

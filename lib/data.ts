@@ -1,4 +1,5 @@
 // Centralized data management for all content
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -342,3 +343,62 @@ export const blogPosts: BlogPost[] = [
 
 
 
+export const courses = [
+  {
+    slug: "ai-engineer-bootcamp",
+    title: "AI Engineer Bootcamp 2026",
+    instructor: "Brain Train Faculty",
+    price: 3999,
+    originalPrice: 7999,
+    rating: 4.7,
+    students: 32951,
+    duration: "8 Weeks",
+    level: "Intermediate",
+    updated: "February 2026",
+    bestseller: true,
+    premium: true,
+    shortDescription:
+      "Become a production-ready AI Engineer with real enterprise projects.",
+    description:
+      "Master enterprise AI systems including LLMs, RAG, AI Agents and MCP integrations.",
+    image: "/assets/images/course1.jpg",
+  },
+  {
+    slug: "agentic-ai-track",
+    title: "AI Engineer Agentic Track",
+    instructor: "Brain Train Faculty",
+    price: 4499,
+    originalPrice: 8999,
+    rating: 4.8,
+    students: 21000,
+    duration: "10 Weeks",
+    level: "Advanced",
+    updated: "March 2026",
+    bestseller: true,
+    premium: true,
+    shortDescription:
+      "Build AI Agents using OpenAI SDK, CrewAI, LangGraph and AutoGen.",
+    description:
+      "Hands-on projects to build real world multi-agent enterprise systems.",
+    image: "/assets/images/course2.jpg",
+  },
+  {
+    slug: "llm-engineering-core",
+    title: "LLM Engineering Core Track",
+    instructor: "Brain Train Faculty",
+    price: 3499,
+    originalPrice: 6999,
+    rating: 4.6,
+    students: 18000,
+    duration: "6 Weeks",
+    level: "Intermediate",
+    updated: "January 2026",
+    bestseller: false,
+    premium: true,
+    shortDescription:
+      "Deep dive into RAG pipelines, fine-tuning and LLM deployment.",
+    description:
+      "Complete system design for scalable AI applications.",
+    image: "/assets/images/course3.jpg",
+  },
+];
