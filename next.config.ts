@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 const nextConfig: NextConfig = {
    // ------ FIX: Disable ESLint during production build ------
   eslint: {
