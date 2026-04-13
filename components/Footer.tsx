@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
   {/* Logo + Name */}
   <div className="flex items-center mb-1">
     <img
-      src="/assets/images/logo.png"
+      src="/assets/images/logo.jpeg"
       alt="Brain Train Logo"
       className="rounded-full w-12 h-12 mr-2"
     />

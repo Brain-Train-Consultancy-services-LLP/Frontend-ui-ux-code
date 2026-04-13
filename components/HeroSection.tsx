@@ -1,60 +1,3 @@
-/*"use client";
-import Image from "next/image";
-import Link from "next/link";
-import HeroImage from "@/public/assets/images/hero-ai.png"
-
-
-const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center bg-gray-50 text-gray-900 font-inter">
-  <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between">
-    
-  
-    <div className="md:w-1/2 space-y-6">
-      <h1 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in-up">
-        Empowering Innovation with AI & Professional Consulting
-      </h1>
-      <p className="text-lg md:text-xl text-gray-700 animate-fade-in-up animate-delay-100">
-        Helping businesses and students harness AI-driven solutions for growth and success.
-      </p>
-
-      
-      <div className="flex gap-4 mt-4 animate-fade-in-up animate-delay-200 flex-wrap">
-        <Link href="/contact" className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-          Get in Touch
-        </Link>
-        <Link href="/register" className="bg-gradient-to-r from-[#1e40af] to-[#3b82f6] text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition">
-          Register
-        </Link>
-        <Link href="/marketplace" className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition">
-          Join Our MarketPlace
-        </Link>
-      </div>
-
-     
-      <div className="flex gap-4 mt-6 flex-wrap animate-fade-in-up animate-delay-300">
-        <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-medium">🚀 Fast AI Solutions</div>
-        <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-medium">💼 Professional Consulting</div>
-      </div>
-    </div>
-
-    
-    <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center items-center animate-fade-in-right animate-delay-300">
-      <Image
-        src={HeroImage}
-        alt="AI Innovation"
-        className="rounded-xl shadow-lg w-full max-w-md md:max-w-lg h-auto object-contain select-none pointer-events-none"
-        draggable={false}
-      />
-    </div>
-  </div>
-</section>
-
-  );
-};
-
-export default Hero;*/
-
 
 "use client";
 
@@ -103,12 +46,29 @@ const Hero = () => {
                 Explore Our Capabilities →
               </Link>
 
-              <Link
-                href="/marketplace"
-                className="text-blue-200 underline underline-offset-4 hover:text-white"
-              >
-                View Solutions
-              </Link>
+           <a
+  href="https://brainztalks.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative flex items-center gap-2 px-7 py-3 rounded-full 
+             bg-white/5 backdrop-blur-md border border-white/10 
+             text-blue-200 hover:text-white 
+             transition-all duration-300 ease-out
+             hover:bg-white/10 hover:border-white/20"
+>
+  {/* Glow effect */}
+  <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 
+                   bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-indigo-500/20 blur-md"></span>
+
+  {/* Content */}
+  <span className="relative z-10 font-medium tracking-wide">
+    Visit BrainzTalks
+  </span>
+
+  <span className="relative z-10 text-lg transform transition-transform duration-300 group-hover:translate-x-1">
+    ↗
+  </span>
+</a>
             </div>
 
             <div className="flex flex-wrap gap-6 pt-8 text-sm text-blue-200 justify-center lg:justify-start">

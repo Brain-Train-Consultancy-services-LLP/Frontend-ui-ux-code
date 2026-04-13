@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaBars, FaTimes, FaExternalLinkAlt } from "react-icons/fa";
-import Logo from "@/public/assets/images/logo.png";
+import Logo from "@/public/assets/images/logo.jpeg";
 
 /* =========================
    MENU CONFIG
@@ -105,7 +105,7 @@ const Header: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
         ${hideHeader ? "-translate-y-full" : "translate-y-0"}
-       bg-white border-b border-gray-200 shadow-sm`}
+        bg-[#0f1117] border-b border-[#1e2535]`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
 
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium  text-gray-700 hover:text-indigo-600 transition"
+                className="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition"
               >
                 {item.name}
               </Link>
@@ -168,7 +168,7 @@ const Header: React.FC = () => {
 
             {/* MOBILE BUTTON */}
             <button
-              className="lg:hidden text-gray-700"
+              className="md:hidden p-2 text-[#8892a4] hover:text-white"
               onClick={() => setIsMenuOpen(true)}
             >
               <FaBars size={20} />
@@ -188,7 +188,7 @@ const Header: React.FC = () => {
       {/* MOBILE DRAWER */}
       <div
         ref={drawerRef}
-        className={`fixed top-0 right-0 h-full w-full bg-white text-gray-900 shadow-2xl z-50 transform transition-transform duration-300 lg:hidden
+        className={`fixed top-0 right-0 h-full w-full bg-[#0f1117] border-b border-[#1e2535]  shadow-2xl z-50 transform transition-transform duration-300 lg:hidden
         ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* TOP */}
@@ -207,7 +207,7 @@ const Header: React.FC = () => {
               key={item.name}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="py-3 border-b border-gray-200 text-gray-700 hover:text-indigo-600"
+              className="py-3 border-b border-gray-200 text-gray-300 hover:text-indigo-600"
             >
               {item.name}
             </Link>

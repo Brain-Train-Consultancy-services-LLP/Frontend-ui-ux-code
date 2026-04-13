@@ -68,7 +68,6 @@ const nextConfig: NextConfig = {
 
   
 
-  
 
   // Redirects for SEO
   async redirects() {
