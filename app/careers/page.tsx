@@ -50,29 +50,29 @@ export default function Careers() {
   });
 
   return (
-    <div className="bg-gray-50 min-h-screen px-12 py-10">
+    <div className="bg-[#0a0d14] min-h-screen px-12 py-10">
 
       {/* Heading */}
       <h1 className="text-4xl font-bold text-gray-800 mb-4">
         Find your next opportunity
       </h1>
 
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-400 mb-8">
         Explore roles across AI, Cloud, Software Engineering, and more.
       </p>
 
-      {/* Filters Section */}
-      <div className="bg-white p-6 rounded-xl shadow mb-10 grid md:grid-cols-4 gap-4">
+       {/* Filters Section */}
+      <div className="bg-[#121826] border border-[#1e2535] p-6 rounded-xl shadow mb-10 grid md:grid-cols-4 gap-4">
 
         <input
           type="text"
           placeholder="Search jobs..."
-          className="border p-2 rounded"
+          className="bg-[#0a0d14] border border-[#1e2535] p-2 rounded text-white placeholder-gray-500"
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <select
-          className="border p-2 rounded"
+       <select
+          className="bg-[#0a0d14] border border-[#1e2535] p-2 rounded text-white"
           onChange={(e) => setLocation(e.target.value)}
         >
           <option value="">All Locations</option>
@@ -83,7 +83,7 @@ export default function Careers() {
         </select>
 
         <select
-          className="border p-2 rounded"
+          className="bg-[#0a0d14] border border-[#1e2535] p-2 rounded text-white"
           onChange={(e) => setExperience(e.target.value)}
         >
           <option value="">All Experience</option>
@@ -97,7 +97,7 @@ export default function Careers() {
             setLocation("");
             setExperience("");
           }}
-          className="bg-gray-200 rounded px-4"
+          className="bg-[#1e2535] hover:bg-[#2a3245] rounded px-4 transition"
         >
           Clear Filters
         </button>
@@ -114,7 +114,7 @@ export default function Careers() {
         {filteredJobs.map((job) => (
           <div
             key={job.id}
-            className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+             className="bg-[#121826] border border-[#1e2535] p-6 rounded-xl shadow hover:shadow-blue-500/10 hover:scale-[1.02] transition"
           >
             <h2 className="text-xl font-semibold text-gray-800">
               {job.title}
