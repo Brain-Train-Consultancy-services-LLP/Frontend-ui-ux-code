@@ -43,6 +43,7 @@ const Header: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -72,6 +73,7 @@ const Header: React.FC = () => {
     if (!isMenuOpen || !drawerRef.current) return;
 
     const drawer = drawerRef.current;
+
     const focusables = drawer.querySelectorAll<HTMLElement>(
       "a, button, [tabindex]:not([tabindex='-1'])"
     );
@@ -96,6 +98,7 @@ const Header: React.FC = () => {
     };
 
     document.addEventListener("keydown", handleKeyDown);
+
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
 
@@ -107,11 +110,11 @@ const Header: React.FC = () => {
         ${hideHeader ? "-translate-y-full" : "translate-y-0"}
         bg-[#0f1117] border-b border-[#1e2535]`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between px-10 py-4">
 
           {/* LOGO */}
-          <Link href="/" className="flex items-center gap-3">
-          <div className="p-1 rounded-full bg-gray-300"></div>
+         <Link href="/" className="flex items-center gap-4 shrink-0">
+
             <div className="relative w-10 h-10">
               <Image
                 src={Logo}
@@ -120,12 +123,12 @@ const Header: React.FC = () => {
                 className="rounded-full object-cover"
               />
             </div>
-            
 
             <div className="leading-tight">
               <p className="text-xl font-extrabold bg-gradient-to-r from-indigo-400 to-blue-500 bg-clip-text text-transparent">
                 Brain Train
               </p>
+
               <p className="text-xs text-gray-500">
                 Consultancy Services LLP
               </p>
@@ -146,7 +149,7 @@ const Header: React.FC = () => {
           </nav>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
 
             {/* BrainzTalks */}
             <a
@@ -158,18 +161,39 @@ const Header: React.FC = () => {
               BrainzTalks <FaExternalLinkAlt size={12} />
             </a>
 
+            {/* LOGIN */}
+            <a
+              href="https://brainztalks.com/auth/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex items-center justify-center min-w-[100px] text-sm px-5 py-2.5 border border-indigo-500 text-indigo-400 rounded-xl hover:bg-indigo-500 hover:text-white transition"
+            >
+              Login
+            </a>
+
+            {/* REGISTER */}
+            <a
+              href="https://brainztalks.com/auth/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex items-center justify-center min-w-[110px] text-sm px-5 py-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition"
+            >
+              Register
+            </a>
+
             {/* CTA */}
             <Link
               href="/contact"
-              className="hidden lg:block text-sm px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition"
+              className="hidden lg:flex items-center justify-center min-w-[130px] text-sm px-5 py-2.5 bg-white/10 text-white rounded-xl hover:bg-white/20 transition"
             >
               Get in Touch
             </Link>
 
             {/* MOBILE BUTTON */}
             <button
-              className="md:hidden p-2 text-[#8892a4] hover:text-white"
+              className="lg:hidden p-2 text-[#8892a4] hover:text-white"
               onClick={() => setIsMenuOpen(true)}
+              aria-label="Open Menu"
             >
               <FaBars size={20} />
             </button>
@@ -180,7 +204,7 @@ const Header: React.FC = () => {
       {/* BACKDROP */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
@@ -188,44 +212,75 @@ const Header: React.FC = () => {
       {/* MOBILE DRAWER */}
       <div
         ref={drawerRef}
-        className={`fixed top-0 right-0 h-full w-full bg-[#0f1117] border-b border-[#1e2535]  shadow-2xl z-50 transform transition-transform duration-300 lg:hidden
+        className={`fixed top-0 right-0 h-full w-full bg-[#0f1117]
+        shadow-2xl z-50 transform transition-transform duration-300 lg:hidden
         ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* TOP */}
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-          <span className="font-semibold">Menu</span>
 
-          <button onClick={() => setIsMenuOpen(false)}>
-            <FaTimes />
+        {/* TOP */}
+        <div className="flex justify-between items-center px-6 py-4 border-b border-[#1e2535]">
+          <span className="font-semibold text-white text-lg">
+            Menu
+          </span>
+
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-300 hover:text-white"
+            aria-label="Close Menu"
+          >
+            <FaTimes size={20} />
           </button>
         </div>
 
         {/* LINKS */}
         <nav className="flex flex-col px-6 py-6">
+
           {PUBLIC_NAV.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="py-3 border-b border-gray-200 text-gray-300 hover:text-indigo-600"
+              className="py-4 border-b border-[#1e2535] text-gray-300 hover:text-indigo-400 transition"
             >
               {item.name}
             </Link>
           ))}
 
-          {/* BrainzTalks Mobile */}
+          {/* LOGIN */}
+          <a
+            href="https://brainztalks.com/auth/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-4 border-b border-[#1e2535] text-gray-300 hover:text-indigo-400 transition"
+          >
+            Login
+          </a>
+
+          {/* REGISTER */}
+          <a
+            href="https://brainztalks.com/auth/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-4 border-b border-[#1e2535] text-gray-300 hover:text-indigo-400 transition"
+          >
+            Register
+          </a>
+
+          {/* BrainzTalks */}
           <a
             href="https://brainztalks.com"
             target="_blank"
-            className="py-3 text-indigo-600"
+            rel="noopener noreferrer"
+            className="py-4 border-b border-[#1e2535] text-indigo-400 hover:text-indigo-300 transition"
           >
             BrainzTalks ↗
           </a>
 
+          {/* CONTACT BUTTON */}
           <Link
             href="/contact"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-4 text-center py-2 bg-indigo-600 text-white rounded-lg"
+            className="mt-6 text-center py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition"
           >
             Get in Touch
           </Link>
