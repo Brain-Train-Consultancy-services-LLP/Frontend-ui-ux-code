@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+import Header from "@/components/layout/Header/Header";
+import HeroSection from "@/components/landing/hero/HeroSection";
 import AboutUs from "@/components/AboutUs";
 import Services from "@/components/Services";
 import Industries from "@/components/Industries";
@@ -34,12 +34,13 @@ export default function Home() {
       {/* Header */}
       <Header />
 
-      {/* Main Content */}
+    
       <main className="flex-grow w-full">
+        
         <section id="home" data-aos="fade-up" className="w-full">
           <HeroSection />
         </section>
-
+{/*
         <section id="about" data-aos="fade-up" className="w-full">
           <AboutUs />
         </section>
@@ -72,6 +73,7 @@ export default function Home() {
         <section data-aos="fade-up" className="w-full">
           <Insights />
         </section>
+        */}
       </main>
 
     </div>

@@ -137,6 +137,20 @@ export const testimonialsApi = {
   }
 };
 
+// src/lib/api.ts
+
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL;
+
+
+export const API_ENDPOINTS = {
+  SEND_OTP: `${API_BASE_URL}/auth/send-otp`,
+  VERIFY_OTP: `${API_BASE_URL}/auth/verify-otp`,
+  LOGIN: `${API_BASE_URL}/auth/login`,
+  REGISTER: `${API_BASE_URL}/auth/register`,
+  UPLOAD_RESUME: `${API_BASE_URL}/files/resume`,
+};  
+
 // Blog API
 export const blogApi = {
   async getAll(): Promise<ApiResponse<BlogPost[]>> {

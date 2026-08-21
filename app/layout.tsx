@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { AuthProvider } from "@/app/context/AuthContext";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -61,10 +62,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           strategy="afterInteractive"
         />
 
-        <AuthProvider>
-          <main className="flex-grow">{children}</main>
-         
-        </AuthProvider>
+       <AuthProvider>
+  <main className="flex-grow">
+    {children}
+  </main>
+
+  <Toaster
+    position="top-right"
+    richColors
+    closeButton
+    duration={3000}
+  />
+</AuthProvider>
 
         <Analytics />
       </body>
