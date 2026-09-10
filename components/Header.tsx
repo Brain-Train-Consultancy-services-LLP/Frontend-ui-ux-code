@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { FaBars, FaTimes, FaExternalLinkAlt } from "react-icons/fa";
-import Logo from "@/public/assets/images/logo.jpeg";
+import { FaBars, FaTimes, FaExternalLinkAlt, FaBrain } from "react-icons/fa";
 
 /* =========================
    MENU CONFIG
@@ -115,13 +113,8 @@ const Header: React.FC = () => {
           {/* LOGO */}
          <Link href="/" className="flex items-center gap-4 shrink-0">
 
-            <div className="relative w-10 h-10">
-              <Image
-                src={Logo}
-                alt="Brain Train"
-                fill
-                className="rounded-full object-cover"
-              />
+            <div className="relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 shadow-md">
+              <FaBrain size={20} className="text-white" />
             </div>
 
             <div className="leading-tight">

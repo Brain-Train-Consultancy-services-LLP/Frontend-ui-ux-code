@@ -302,11 +302,9 @@ const MVPsPage = () => {
       {/* Leader Section */}
       <section className="w-full py-20 text-center bg-white border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-6">
-          <img
-            src="/assets/images/team1.jpeg"
-            alt="Rajendran Mariagnanam"
-            className="w-40 h-40 mx-auto rounded-full object-cover border-4 border-indigo-400 shadow-lg mb-6"
-          />
+          <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-indigo-700 to-blue-800 flex items-center justify-center border-4 border-indigo-400 shadow-lg mb-6 text-white text-4xl font-bold">
+            RM
+          </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Rajendran Mariagnanam</h2>
           <p className="text-indigo-600 font-medium mb-4">
             Founder & CEO – Brain Train Consulrancy Services LLP
@@ -345,11 +343,9 @@ const MVPsPage = () => {
 
               {/* Leader */}
               <div className="flex flex-col items-center bg-gray-50 rounded-xl p-4">
-                <img
-                  src={mvp.members[0].image}
-                  alt="Leader"
-                  className="w-20 h-20 rounded-full border-2 border-indigo-300 mb-3"
-                />
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center border-2 border-indigo-300 mb-3 text-white text-xl font-bold">
+                  MS
+                </div>
                 <h4 className="text-lg font-semibold text-gray-800">
                   {mvp.members[0].name}
                 </h4>

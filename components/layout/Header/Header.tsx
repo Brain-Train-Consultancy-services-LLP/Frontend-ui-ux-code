@@ -2,10 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
-
-import Logo from "@/public/assets/images/logo.jpeg";
+import { Menu, X, Brain } from "lucide-react";
 
 import AnnouncementBar from "./AnnouncementBar";
 import DesktopNavigation from "./DesktopNavigation";
@@ -123,20 +120,22 @@ export default function Header() {
               <div
                 className="
                 relative
+                flex
                 h-12
                 w-12
+                items-center
+                justify-center
                 overflow-hidden
                 rounded-2xl
+                bg-gradient-to-br
+                from-indigo-600
+                to-blue-600
+                shadow-md
                 ring-2
                 ring-indigo-500/30
               "
               >
-                <Image
-                  src={Logo}
-                  alt="Brain Train"
-                  fill
-                  className="object-cover"
-                />
+                <Brain className="h-6 w-6 text-white" />
               </div>
 
               <div>

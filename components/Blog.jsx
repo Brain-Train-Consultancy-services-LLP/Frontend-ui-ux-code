@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { FaRegNewspaper } from "react-icons/fa";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
@@ -10,7 +9,7 @@ const blogs = [
     title: "AI Trends 2025",
     author: "Monika Singh",
     date: "Oct 15, 2025",
-    img: "/blog1.jpg",
+    gradient: "from-indigo-900 via-blue-900 to-slate-900",
     description: "Explore the upcoming trends in AI and how businesses can leverage them.",
     color: "text-blue-400"
   },
@@ -18,7 +17,7 @@ const blogs = [
     title: "Data Analytics in Enterprises",
     author: "Rajesh Kumar",
     date: "Sep 28, 2025",
-    img: "/blog2.jpg",
+    gradient: "from-emerald-900 via-teal-900 to-slate-900",
     description: "Learn how data analytics can transform decision-making in large organizations.",
     color: "text-green-400"
   },
@@ -26,7 +25,7 @@ const blogs = [
     title: "Automation Best Practices",
     author: "Sophia Lee",
     date: "Aug 12, 2025",
-    img: "/blog3.jpg",
+    gradient: "from-purple-900 via-indigo-900 to-slate-900",
     description: "Discover best practices for implementing automation efficiently in business processes.",
     color: "text-yellow-400"
   },
@@ -55,8 +54,14 @@ const BlogCard = ({ blog }) => {
       }}
       className="relative w-80 sm:w-96 md:w-80 lg:w-96 bg-white/90 backdrop-blur-md border border-gray-200 rounded-3xl shadow-2xl overflow-hidden cursor-grab transition-transform"
     >
-      <div className="relative w-full h-56">
-        <Image src={blog.img} alt={blog.title} fill className="object-cover" />
+      <div className={`relative w-full h-56 bg-gradient-to-br ${blog.gradient} p-6 flex flex-col justify-between overflow-hidden`}>
+        <div className="flex justify-between items-start">
+          <span className="text-xs bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full font-medium">
+            Article
+          </span>
+          <FaRegNewspaper size={24} className="text-white/80" />
+        </div>
+        <h4 className="text-white text-xl font-bold line-clamp-2">{blog.title}</h4>
       </div>
       <div className="p-6 text-left">
         <div className={`mb-3 ${blog.color}`}>

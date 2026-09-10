@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaYoutube, FaInstagram, FaBrain } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -32,11 +32,9 @@ const Footer: React.FC = () => {
 <div className="flex flex-col items-start ">
   {/* Logo + Name */}
   <div className="flex items-center mb-1">
-    <img
-      src="/assets/images/logo.jpeg"
-      alt="Brain Train Logo"
-      className="rounded-full w-12 h-12 mr-2"
-    />
+    <div className="rounded-full w-12 h-12 mr-3 bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-md">
+      <FaBrain size={22} />
+    </div>
     <div className="flex flex-col ">
       <h2 className="text-2xl font-bold ">
         Brain Train

@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import CEO from "@/public/assets/images/team1.jpeg";
+import { UserCheck } from "lucide-react";
 
 export default function CeoNotePage() {
   return (
@@ -46,14 +45,13 @@ export default function CeoNotePage() {
 
               <div className="absolute inset-0 bg-gradient-to-tr from-emerald-300/40 to-blue-300/40 blur-3xl rounded-full" />
 
-              {/* Image */}
+              {/* Executive Avatar */}
 
-              <Image
-                src={CEO}
-                alt="CEO"
-                className="relative w-80 h-80 rounded-full object-cover shadow-2xl border-8 border-white"
-                priority
-              />
+              <div className="relative w-80 h-80 rounded-full bg-gradient-to-br from-indigo-800 via-blue-900 to-slate-900 flex flex-col items-center justify-center shadow-2xl border-8 border-white text-white p-6">
+                <UserCheck size={90} className="text-emerald-400 mb-2" />
+                <p className="text-xl font-bold tracking-wide text-slate-100 text-center">Major Rajendran</p>
+                <p className="text-xs text-indigo-300 font-medium">Retd</p>
+              </div>
 
               <div className="text-center mt-6">
                 <p className="font-medium">CEO</p>

@@ -1,9 +1,7 @@
 
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import HeroImage from "@/public/assets/images/hero-ai.png";
 
 const Hero = () => {
   return (
@@ -81,12 +79,53 @@ const Hero = () => {
 
           {/* Right */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-            <Image
-              src={HeroImage}
-              alt="Enterprise AI Innovation"
-              className="w-full max-w-xl"
-              priority
-            />
+            <div className="relative w-full max-w-lg p-8 rounded-3xl bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl border border-white/15 shadow-2xl overflow-hidden group">
+              <div className="absolute -top-24 -right-24 w-60 h-60 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-cyan-500/30 transition-all duration-700" />
+              <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl group-hover:bg-purple-500/30 transition-all duration-700" />
+
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-xs uppercase tracking-wider font-mono text-cyan-300">BrainTrain AI Engine</span>
+                  </div>
+                  <span className="text-xs bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 px-3 py-1 rounded-full">Enterprise v2.4</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/40 transition">
+                    <p className="text-xs text-blue-200">System Accuracy</p>
+                    <p className="text-2xl font-bold text-white mt-1">99.4%</p>
+                    <div className="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                      <div className="bg-cyan-400 h-full w-[99%]" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400/40 transition">
+                    <p className="text-xs text-blue-200">Active Pipelines</p>
+                    <p className="text-2xl font-bold text-white mt-1">120+</p>
+                    <div className="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                      <div className="bg-indigo-400 h-full w-[85%]" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-900/40 to-blue-900/40 border border-white/10 space-y-2">
+                  <div className="flex justify-between text-xs text-blue-200">
+                    <span>AI Model Integration</span>
+                    <span className="text-emerald-400">Connected</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono text-gray-300 bg-black/30 p-2.5 rounded-xl border border-white/5">
+                    <span className="text-cyan-400">$&gt;</span> braintrain --deploy enterprise-llm
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs text-blue-200/80 pt-2">
+                  <span>✔ Multi-Cloud AI Deployment</span>
+                  <span>✔ Zero-Downtime Pipeline</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>

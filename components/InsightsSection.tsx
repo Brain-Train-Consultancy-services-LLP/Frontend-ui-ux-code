@@ -2,29 +2,31 @@
 
 import { motion } from "framer-motion";
 import { HiLightBulb, HiChartBar, HiDocumentSearch } from "react-icons/hi";
-import Image from "next/image";
 
 const insights = [
   {
     title: "AI Transformation Insights",
     description:
       "Strategic insights on enterprise AI adoption, governance, and digital transformation. (Coming Soon)",
-    icon: <HiLightBulb className="text-indigo-500" size={34} />,
-    bg: "/assets/images/insights1.png",
+    icon: <HiLightBulb className="text-indigo-400" size={34} />,
+    gradient: "from-indigo-900 via-slate-900 to-purple-950",
+    badge: "Enterprise AI",
   },
   {
     title: "Industry Research & Whitepapers",
     description:
       "Deep-dive market reports and whitepapers on automation, analytics, and cloud AI. (Coming Soon)",
-    icon: <HiDocumentSearch className="text-blue-500" size={34} />,
-    bg: "/assets/images/insights2.png",
+    icon: <HiDocumentSearch className="text-cyan-400" size={34} />,
+    gradient: "from-blue-900 via-slate-900 to-cyan-950",
+    badge: "Research",
   },
   {
     title: "Automation Case Studies",
     description:
       "Real-world enterprise automation journeys, outcomes, and proven frameworks. (Coming Soon)",
-    icon: <HiChartBar className="text-green-500" size={34} />,
-    bg: "/assets/images/insights3.png",
+    icon: <HiChartBar className="text-emerald-400" size={34} />,
+    gradient: "from-emerald-900 via-slate-900 to-teal-950",
+    badge: "Case Studies",
   },
 ];
 
@@ -51,37 +53,39 @@ export default function InsightsSection() {
               whileHover={{ y: -12 }} // Lift animation
               className="relative backdrop-blur-xl bg-white/20 border border-white/30 
                          rounded-3xl shadow-xl overflow-hidden 
-                         group cursor-pointer transition-all duration-300"
+                         group cursor-pointer transition-all duration-300 flex flex-col"
             >
-              {/* Background Image */}
-              <div className="h-44 sm:h-48 md:h-52 lg:h-56 w-full relative">
-                <Image
-                  src={item.bg}
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all"></div>
+              {/* Card Banner Header */}
+              <div className={`h-44 sm:h-48 md:h-52 lg:h-56 w-full relative bg-gradient-to-br ${item.gradient} p-6 flex flex-col justify-between overflow-hidden`}>
+                <div className="absolute -right-8 -bottom-8 opacity-15 text-white transform group-hover:scale-110 transition-transform duration-700">
+                  {item.icon}
+                </div>
+                <div className="flex justify-between items-start z-10">
+                  <span className="text-xs bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full font-medium">
+                    {item.badge}
+                  </span>
+                </div>
+                <div className="z-10">{item.icon}</div>
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-7 text-left">
-                <div className="mb-4">{item.icon}</div>
+              <div className="p-6 md:p-7 text-left flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3">
+                    {item.title}
+                  </h3>
 
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3">
-                  {item.title}
-                </h3>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                    {item.description}
+                  </p>
 
-                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                  {item.description}
-                </p>
-
-                <button
-                  onClick={(e) => e.preventDefault()}
-                  className="mt-4 md:mt-5 text-indigo-600 font-medium hover:underline cursor-default"
-                >
-                  Coming Soon →
-                </button>
+                  <button
+                    onClick={(e) => e.preventDefault()}
+                    className="mt-4 md:mt-5 text-indigo-600 font-medium hover:underline cursor-default"
+                  >
+                    Coming Soon →
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}
