@@ -1,319 +1,9 @@
-/*"use client";
-
-import { AnimatePresence, motion } from "framer-motion";
-import { X, ChevronDown, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
-import { MENU } from "./menu.config";
-
-interface Props {
-  open: boolean;
-  onClose: () => void;
-}
-
-export default function MobileDrawer({
-  open,
-  onClose,
-}: Props) {
-  const [expanded, setExpanded] =
-    useState<number | null>(null);
-
-  return (
-    <AnimatePresence>
-
-      {open && (
-
-        <>
-
-          
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="
-            fixed
-            inset-0
-            z-40
-            bg-black/70
-            backdrop-blur-sm
-            xl:hidden
-            "
-            onClick={onClose}
-          />
-
-         
-
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{
-              type: "spring",
-              stiffness: 250,
-              damping: 28,
-            }}
-            className="
-            fixed
-            right-0
-            top-0
-            z-50
-            flex
-            h-full
-            w-[92%]
-            max-w-md
-            flex-col
-            overflow-y-auto
-            bg-[#08111F]
-            shadow-2xl
-            "
-          >
-          
-
-            <div
-              className="
-              flex
-              items-center
-              justify-between
-              border-b
-              border-white/10
-              px-6
-              py-5
-              "
-            >
-              <div>
-
-                <h2 className="font-bold text-white">
-                  Brain Train
-                </h2>
-
-                <p className="text-xs text-gray-400">
-                  Enterprise Ecosystem
-                </p>
-
-              </div>
-
-              <button
-                onClick={onClose}
-                className="text-white"
-              >
-                <X size={24} />
-              </button>
-            </div>
-
-           
-
-            <div className="px-4 py-5">
-
-              {MENU.map((menu, index) => (
-
-                <div
-                  key={menu.title}
-                  className="mb-4"
-                >
-                  <button
-                    onClick={() =>
-                      setExpanded(
-                        expanded === index
-                          ? null
-                          : index
-                      )
-                    }
-                    className="
-                    flex
-                    w-full
-                    items-center
-                    justify-between
-                    rounded-xl
-                    bg-white/5
-                    px-5
-                    py-4
-                    text-left
-                    text-white
-                    "
-                  >
-                    {menu.title}
-
-                    {expanded === index ? (
-                      <ChevronDown />
-                    ) : (
-                      <ChevronRight />
-                    )}
-                  </button>
-
-                  <AnimatePresence>
-
-                    {expanded === index && (
-
-                      <motion.div
-                        initial={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        animate={{
-                          height: "auto",
-                          opacity: 1,
-                        }}
-                        exit={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        className="
-                        overflow-hidden
-                        "
-                      >
-                        {menu.sections.map(
-                          (section) => (
-
-                            <div
-                              key={section.title}
-                              className="mt-5"
-                            >
-                              <h4
-                                className="
-                                mb-3
-                                text-sm
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-indigo-400
-                                "
-                              >
-                                {section.title}
-                              </h4>
-
-                              <div className="space-y-2">
-
-                                {section.items.map(
-                                  (item) => {
-
-                                    const Icon =
-                                      item.icon;
-
-                                    return (
-
-                                      <Link
-                                        key={
-                                          item.title
-                                        }
-                                        href={
-                                          item.href
-                                        }
-                                        onClick={
-                                          onClose
-                                        }
-                                        className="
-                                        flex
-                                        items-start
-                                        gap-4
-                                        rounded-xl
-                                        px-4
-                                        py-3
-                                        hover:bg-white/5
-                                        "
-                                      >
-                                        <Icon
-                                          size={
-                                            20
-                                          }
-                                          className="mt-1 text-indigo-400"
-                                        />
-
-                                        <div>
-
-                                          <p className="font-medium text-white">
-                                            {
-                                              item.title
-                                            }
-                                          </p>
-
-                                          <p className="text-xs text-gray-400">
-                                            {
-                                              item.description
-                                            }
-                                          </p>
-
-                                        </div>
-
-                                      </Link>
-
-                                    );
-
-                                  }
-                                )}
-
-                              </div>
-
-                            </div>
-
-                          )
-                        )}
-
-                      </motion.div>
-
-                    )}
-
-                  </AnimatePresence>
-
-                </div>
-
-              ))}
-
-            </div>
-
-
-            <div
-              className="
-              mt-auto
-              border-t
-              border-white/10
-              p-6
-              "
-            >
-              <Link
-                href="https://brainztalks.com/auth/register"
-                className="
-                flex
-                justify-center
-                rounded-xl
-                bg-indigo-600
-                px-6
-                py-3
-                font-semibold
-                text-white
-                "
-              >
-                Register
-              </Link>
-            </div>
-
-          </motion.div>
-
-        </>
-
-      )}
-
-    </AnimatePresence>
-  );
-}*/
-
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-
-import {
-  AnimatePresence,
-  motion,
-} from "framer-motion";
-
-import {
-  ChevronDown,
-  ChevronRight,
-  X,
-  Brain,
-} from "lucide-react";
-
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, ChevronRight, X, Brain } from "lucide-react";
 import { MENU } from "./menu.config";
 
 interface MobileDrawerProps {
@@ -325,348 +15,167 @@ export default function MobileDrawer({
   isOpen,
   onClose,
 }: MobileDrawerProps) {
-  const [openMenu, setOpenMenu] =
-    useState<string | null>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const toggleMenu = (title: string) => {
-  if (openMenu === title) {
-    setOpenMenu(null);
-  } else {
-    setOpenMenu(title);
-  }
-};
+    if (openMenu === title) {
+      setOpenMenu(null);
+    } else {
+      setOpenMenu(title);
+    }
+  };
 
-return (
-  <AnimatePresence>
-    {isOpen && (
-      <>
-        {/* BACKDROP */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="
-          fixed inset-0
-          bg-black/70
-          backdrop-blur-sm
-          z-[90]
-          "
-        />
-
-        {/* DRAWER */}
-        <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{
-            type: "spring",
-            damping: 30,
-            stiffness: 300,
-          }}
-          className="
-          fixed
-          right-0
-          top-0
-          h-screen
-          w-full
-          bg-[#0B1220]
-          z-[100]
-          overflow-y-auto
-          "
-        ><div className="sticky top-0 z-20 bg-[#0B1220] border-b border-white/10">
-
-  <div className="flex items-center justify-between px-6 py-5">
-
-    <Link
-      href="/"
-      className="flex items-center gap-3"
-    >
-      <div className="
-      w-11 h-11
-      rounded-xl
-      bg-indigo-600/20
-      flex items-center justify-center
-      ">
-        <Brain
-          className="text-indigo-400"
-          size={24}
-        />
-      </div>
-
-      <div>
-        <h2 className="text-white font-bold text-lg">
-          Brain Train
-        </h2>
-
-        <p className="text-xs text-gray-500">
-          Consultancy Services LLP
-        </p>
-      </div>
-    </Link>
-
-    <button
-      onClick={onClose}
-      className="
-      w-11 h-11
-      rounded-xl
-      bg-white/5
-      flex items-center justify-center
-      "
-    >
-      <X className="text-white" />
-    </button>
-
-  </div>
-</div>
-<div className="px-6 py-6 space-y-4">
-
-  {MENU.map((menu) => (
-
-    <div
-      key={menu.title}
-      className="
-      rounded-2xl
-      border border-white/10
-      overflow-hidden
-      "
-    >
-      <button
-  onClick={() =>
-    toggleMenu(menu.title)
-  }
-  className="
-  w-full
-  flex
-  items-center
-  justify-between
-  px-5
-  py-5
-  text-left
-  "
->
-  <div>
-
-    <h3 className="
-    text-white
-    font-semibold
-    text-lg
-    ">
-      {menu.title}
-    </h3>
-
-    <p className="
-    text-sm
-    text-gray-500
-    mt-1
-    ">
-      Explore {menu.title}
-    </p>
-
-  </div>
-
-  {openMenu === menu.title ? (
-    <ChevronDown
-      className="text-gray-400"
-    />
-  ) : (
-    <ChevronRight
-      className="text-gray-400"
-    />
-  )}
-</button>
-<AnimatePresence>
-
-  {openMenu === menu.title && (
-
-    <motion.div
-      initial={{
-        height: 0,
-        opacity: 0,
-      }}
-      animate={{
-        height: "auto",
-        opacity: 1,
-      }}
-      exit={{
-        height: 0,
-        opacity: 0,
-      }}
-       transition={{
-    duration: 0.25,
-    ease: "easeInOut",
-  }}
-      className="
-      border-t border-white/10
-      bg-white/[0.02]
-      overflow-hidden
-      "
-    >
-     <div className="p-4 space-y-5">
-
-  {menu.sections.map((section) => (
-
-    <div key={section.title}>
-
-      <p className="
-      text-xs
-      uppercase
-      tracking-wider
-      text-indigo-400
-      mb-3
-      ">
-        {section.title}
-      </p> 
-
-      <div className="space-y-2">
-
-  {section.items.map((item) => {
-
-    const Icon = item.icon;
-
-    return (
-      <Link
-        key={item.title}
-        href={item.href}
-       onClick={() => {
-    setOpenMenu(null);
-    onClose();
-  }}
-        className="
-        flex
-        items-center
-        gap-4
-        rounded-xl
-        p-4
-        hover:bg-white/5
-        transition
-        "
-      >
-        <div className="
-        w-10 h-10
-        rounded-xl
-        bg-indigo-500/10
-        flex items-center justify-center
-        ">
-          <Icon
-            className="text-indigo-400"
-            size={20}
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* BACKDROP */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[90]"
           />
-        </div>
 
-        <div className="flex-1">
+          {/* DRAWER */}
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{
+              type: "spring",
+              damping: 28,
+              stiffness: 280,
+            }}
+            className="fixed right-0 top-0 h-screen w-full max-w-md bg-[#05070D]/95 backdrop-blur-2xl border-l border-white/10 z-[100] overflow-y-auto flex flex-col shadow-2xl"
+          >
+            {/* STICKY HEADER */}
+            <div className="sticky top-0 z-20 bg-[#05070D]/95 backdrop-blur-xl border-b border-white/10 px-6 py-4 flex items-center justify-between">
+              <Link href="/" onClick={onClose} className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
+                  <Brain className="text-white" size={22} />
+                </div>
+                <div>
+                  <h2 className="text-white font-extrabold text-base tracking-wide">Brain Train</h2>
+                  <p className="text-[10px] text-indigo-400 font-semibold tracking-wider uppercase">Consultancy Services LLP</p>
+                </div>
+              </Link>
 
-          <div className="
-          flex items-center gap-2
-          ">
-            <p className="
-            text-white
-            font-medium
-            ">
-              {item.title}
-            </p>
+              <button
+                onClick={onClose}
+                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-            {item.badge && (
-              <span className="
-              text-[10px]
-              px-2 py-1
-              rounded-full
-              bg-indigo-600
-              text-white
-              font-bold
-              ">
-                {item.badge}
-              </span>
-            )}
-          </div>
+            {/* MENU ACCORDION ITEMS */}
+            <div className="px-5 py-6 space-y-3.5 flex-1">
+              {MENU.map((menu) => (
+                <div
+                  key={menu.title}
+                  className="rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-xl overflow-hidden transition"
+                >
+                  <button
+                    onClick={() => toggleMenu(menu.title)}
+                    className="w-full flex items-center justify-between px-5 py-4 text-left transition hover:bg-slate-800/40"
+                  >
+                    <div>
+                      <h3 className="text-slate-100 font-bold text-base">{menu.title}</h3>
+                      <p className="text-xs text-slate-400 mt-0.5">Explore {menu.title}</p>
+                    </div>
 
-          <p className="
-          text-sm
-          text-gray-500
-          mt-1
-          ">
-            {item.description}
-          </p>
+                    {openMenu === menu.title ? (
+                      <ChevronDown className="text-indigo-400" size={20} />
+                    ) : (
+                      <ChevronRight className="text-slate-500" size={20} />
+                    )}
+                  </button>
 
-        </div>
+                  <AnimatePresence>
+                    {openMenu === menu.title && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="border-t border-slate-800/60 bg-slate-950/60 overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
+                          {menu.sections.map((section) => (
+                            <div key={section.title}>
+                              <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-400 mb-2.5">
+                                {section.title}
+                              </p>
 
-      </Link>
-    );
-  })}
-</div>
-    </div>
-  ))}
+                              <div className="space-y-1.5">
+                                {section.items.map((item) => {
+                                  const Icon = item.icon;
 
-</div>
+                                  return (
+                                    <Link
+                                      key={item.title}
+                                      href={item.href}
+                                      onClick={() => {
+                                        setOpenMenu(null);
+                                        onClose();
+                                      }}
+                                      className="flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-800/60 border border-transparent hover:border-slate-700/50 transition"
+                                    >
+                                      <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                                        <Icon className="text-indigo-400" size={16} />
+                                      </div>
 
-    </motion.div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-2">
+                                          <p className="text-slate-200 font-semibold text-xs truncate">{item.title}</p>
+                                          {item.badge && (
+                                            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-indigo-600/80 text-white font-bold">
+                                              {item.badge}
+                                            </span>
+                                          )}
+                                        </div>
+                                        <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-2">{item.description}</p>
+                                      </div>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
 
-  )}
-
-</AnimatePresence>
-
-    </div>
-
-  ))}
-
-</div>
-
-<div className="
-px-6
-pb-10
-space-y-4
-">
-
-  <Link
-    href="https://brainztalks.com"
-     target="_blank"
-  rel="noopener noreferrer"
-    className="
-    flex
-    items-center
-    justify-center
-    rounded-2xl
-    bg-indigo-600
-    py-4
-    font-semibold
-    text-white
-    "
-  >
-    Open BrainzTalks
-  </Link>
-<div className="px-6 pb-10">
-  <Link
-    href="/join"
-    onClick={() => {
-    setOpenMenu(null);
-    onClose();
-  }}
-    className="
-      flex
-      items-center
-      justify-center
-      rounded-2xl
-      bg-gradient-to-r
-      from-indigo-600
-      to-purple-600
-      py-4
-      font-semibold
-      text-white
-      transition-all
-      duration-300
-      hover:scale-[1.02]
-      shadow-lg
-      shadow-indigo-500/30
-    "
-  >
-    Join Brain Train
-  </Link>
-</div>
-
-</div>
-        </motion.div>
-      </>
-    )}
-  </AnimatePresence>
-);
+            {/* DRAWER FOOTER CTAS */}
+            <div className="p-5 border-t border-slate-800/80 bg-slate-950/80 space-y-2.5">
+              <Link
+                href="https://brainztalks.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 py-3 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white transition"
+              >
+                Open BrainzTalks
+              </Link>
+              <Link
+                href="/join"
+                onClick={() => {
+                  setOpenMenu(null);
+                  onClose();
+                }}
+                className="flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white py-3 text-xs sm:text-sm font-bold shadow-lg shadow-indigo-600/30 hover:opacity-95 transition"
+              >
+                Join Brain Train
+              </Link>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
 }

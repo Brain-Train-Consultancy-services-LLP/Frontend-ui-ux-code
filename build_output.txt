@@ -1,0 +1,22 @@
+
+> frontend@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.14
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 3.2min
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+
+> Build error occurred
+[Error: ENOENT: no such file or directory, open 'C:\Users\Abhilash Mohanty\Downloads\braintrain-frontend\braintrain-frontend\.next\server\pages-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Abhilash Mohanty\\Downloads\\braintrain-frontend\\braintrain-frontend\\.next\\server\\pages-manifest.json'
+}

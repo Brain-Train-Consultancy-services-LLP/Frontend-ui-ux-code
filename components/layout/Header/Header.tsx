@@ -85,7 +85,7 @@ export default function Header() {
 
         ${
           scrolled
-            ? "backdrop-blur-3xl bg-[#07111F]/90 border-b border-white/10 shadow-2xl"
+            ? "backdrop-blur-xl bg-[#05070D]/85 border-b border-white/10 shadow-2xl"
             : "bg-transparent"
         }
       `}
@@ -99,8 +99,9 @@ export default function Header() {
             flex
             items-center
             justify-between
-            px-8
-            py-4
+            px-4
+            sm:px-8
+            py-3.5
             xl:px-12
           "
           >
@@ -113,7 +114,7 @@ export default function Header() {
               className="
               flex
               items-center
-              gap-4
+              gap-3
               shrink-0
             "
             >
@@ -121,28 +122,31 @@ export default function Header() {
                 className="
                 relative
                 flex
-                h-12
-                w-12
+                h-11
+                w-11
                 items-center
                 justify-center
                 overflow-hidden
-                rounded-2xl
+                rounded-xl
                 bg-gradient-to-br
                 from-indigo-600
-                to-blue-600
-                shadow-md
-                ring-2
-                ring-indigo-500/30
+                via-indigo-500
+                to-purple-600
+                shadow-lg
+                shadow-indigo-600/30
+                ring-1
+                ring-indigo-400/30
               "
               >
-                <Brain className="h-6 w-6 text-white" />
+                <Brain className="h-5 w-5 text-white" />
               </div>
 
               <div>
 
                 <h2
                   className="
-                  text-xl
+                  text-lg
+                  sm:text-xl
                   font-extrabold
                   tracking-wide
                   text-white
@@ -153,10 +157,12 @@ export default function Header() {
 
                 <p
                   className="
-                  text-xs
+                  text-[10px]
+                  sm:text-xs
                   tracking-[0.18em]
                   uppercase
-                  text-indigo-300
+                  text-indigo-400
+                  font-semibold
                 "
                 >
                   Consultancy Services LLP
@@ -192,15 +198,16 @@ export default function Header() {
               xl:hidden
               rounded-xl
               border
-              border-white/10
-              bg-white/5
-              p-3
-              text-white
+              border-slate-800
+              bg-slate-900/80
+              p-2.5
+              text-slate-200
+              hover:text-white
+              hover:bg-slate-800
               transition
-              hover:bg-indigo-600
             "
             >
-              <Menu size={22} />
+              <Menu size={20} />
             </button>
           </div>
         </div>
