@@ -28,7 +28,7 @@ const ANNOUNCEMENTS: Announcement[] = [
     title: "Admissions Open 2026",
     description:
       "Join India's AI & Software Engineering Ecosystem.",
-    href: "/admissions",
+    href: "/courses",
     badge: "OPEN",
   },
 
@@ -38,7 +38,7 @@ const ANNOUNCEMENTS: Announcement[] = [
     title: "Free AI Evaluation",
     description:
       "Get your competency report powered by AI.",
-    href: "/evaluation",
+    href: "/test/evaluation",
     badge: "FREE",
   },
 
@@ -48,7 +48,7 @@ const ANNOUNCEMENTS: Announcement[] = [
     title: "Weekend MVP Challenge",
     description:
       "Build real Micro MVPs in 48 Hours.",
-    href: "/srishtizia",
+    href: "/mvps",
     badge: "NEW",
   },
 
@@ -58,17 +58,17 @@ const ANNOUNCEMENTS: Announcement[] = [
     title: "Thin Client Labs",
     description:
       "Cloud Development Workspace for Students.",
-    href: "/thin-client",
+    href: "/services/software-development",
     badge: "BETA",
   },
 
   {
     id: 5,
     icon: <Sparkles size={16} />,
-    title: "Srishtizia Product 2",
+    title: "Srishtizia Products",
     description:
       "Industry Readiness & Portfolio Building Platform.",
-    href: "/products/srishtizia-product-2",
+    href: "/products",
     badge: "NEW",
   },
 ];

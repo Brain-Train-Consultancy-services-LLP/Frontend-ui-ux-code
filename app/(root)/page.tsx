@@ -6,76 +6,67 @@ import "aos/dist/aos.css";
 
 import Header from "@/components/layout/Header/Header";
 import HeroSection from "@/components/landing/hero/HeroSection";
-import AboutUs from "@/components/AboutUs";
+import FeaturedPrograms from "@/components/landing/FeaturedPrograms";
+import DifferentiationSection from "@/components/landing/DifferentiationSection";
 import Services from "@/components/Services";
-import Industries from "@/components/Industries";
-import Testimonials from "@/components/Testimonials";
-import Insights from "@/components/InsightsSection";
-import ScrollIndicator from "@/components/ui/scroll-indicator";
-import CeoNotePreview  from "@/components/CeoNotePreview";
-import InnovationLabProjects from "@/components/InnovationLabProjects";
 import TalentEcosystemImpact from "@/components/TalentEcosystemImpact";
-
+import CeoNotePreview from "@/components/CeoNotePreview";
+import StrategicCta from "@/components/landing/StrategicCta";
+import ScrollIndicator from "@/components/ui/scroll-indicator";
 
 export default function Home() {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 700,
       once: true,
-      easing: "ease-in-out",
+      easing: "ease-out",
     });
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full bg-[#05070D] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
       {/* Scroll Progress Indicator */}
       <ScrollIndicator />
 
-      {/* Header */}
+      {/* Global Header */}
       <Header />
 
-    
       <main className="flex-grow w-full">
-        
-        <section id="home" data-aos="fade-up" className="w-full">
+        {/* 1. High-Converting Hero with Clear Value Prop, Dual CTAs, Interactive Architecture & Real Stats */}
+        <section id="home" className="w-full">
           <HeroSection />
         </section>
-{/*
-        <section id="about" data-aos="fade-up" className="w-full">
-          <AboutUs />
+
+        {/* 2. Benefit-Focused AI Engineering Programs & Tracks (Direct Conversion to Enrolment) */}
+        <section data-aos="fade-up" className="w-full">
+          <FeaturedPrograms />
         </section>
 
-        <section id="services" data-aos="fade-up" className="w-full">
+        {/* 3. Clear Differentiation: Why BrainTrain vs Traditional Bootcamps */}
+        <section data-aos="fade-up" className="w-full">
+          <DifferentiationSection />
+        </section>
+
+        {/* 4. Benefit-Focused Enterprise & Innovation Services */}
+        <section data-aos="fade-up" className="w-full">
           <Services />
         </section>
 
-        <section data-aos="fade-up" className="w-full">
-          <Industries />
-        </section>
-
-        <section data-aos="fade-up" className="w-full">
-          <InnovationLabProjects />
-        </section>
-
-
+        {/* 5. Verified Social Proof: Real Alumni from NIT, DTU & LPU Placed at TCS, Infosys & Accenture */}
         <section data-aos="fade-up" className="w-full">
           <TalentEcosystemImpact />
         </section>
 
-         <section data-aos="fade-up" className="w-full">
-            <CeoNotePreview />
+        {/* 6. Authentic Founder Credibility & Candid Philosophy */}
+        <section data-aos="fade-up" className="w-full">
+          <CeoNotePreview />
         </section>
 
+        {/* 7. Strategic Dual-Audience Conversion Section (Developers & Enterprises) */}
         <section data-aos="fade-up" className="w-full">
-          <Testimonials />
+          <StrategicCta />
         </section>
-
-        <section data-aos="fade-up" className="w-full">
-          <Insights />
-        </section>
-        */}
       </main>
-
     </div>
   );
 }

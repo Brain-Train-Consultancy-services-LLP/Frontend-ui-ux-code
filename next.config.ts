@@ -69,13 +69,58 @@ const nextConfig: NextConfig = {
   
 
 
-  // Redirects for SEO
+  // Redirects for SEO & aliases
   async redirects() {
     return [
       {
         source: '/home',
         destination: '/',
         permanent: true,
+      },
+      {
+        source: '/admissions',
+        destination: '/courses',
+        permanent: false,
+      },
+      {
+        source: '/evaluation',
+        destination: '/test/evaluation',
+        permanent: false,
+      },
+      {
+        source: '/srishtizia',
+        destination: '/mvps',
+        permanent: false,
+      },
+      {
+        source: '/thin-client',
+        destination: '/products',
+        permanent: false,
+      },
+      {
+        source: '/ai-engineering-studio',
+        destination: '/courses',
+        permanent: false,
+      },
+      {
+        source: '/ecosystem',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/learning',
+        destination: '/courses',
+        permanent: false,
+      },
+      {
+        source: '/community',
+        destination: '/internships',
+        permanent: false,
+      },
+      {
+        source: '/company',
+        destination: '/about',
+        permanent: false,
       },
     ];
   },
